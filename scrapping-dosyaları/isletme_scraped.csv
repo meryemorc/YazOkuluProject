@@ -1,0 +1,189 @@
+Ders Kodu,Ders Adı,Kredi,AKTS
+İKT101,MİKRO İKTİSAT,3,4
+İŞL101,İŞLETMEYE GİRİŞ,3,5
+İŞL107,DAVRANIŞ BİLİMLERİ,3,4
+İŞL109,GÖNÜLLÜLÜK ÇALIŞMALARI,1,4
+İŞL111,YAZIM VE SUNUM TEKNİKLERİ,3,4
+MAT185,MATEMATİK I,3,5
+TRD109,TÜRK DİLİ I,2,2
+YD107,İNGİLİZCE I,2,2
+İKT102,MAKRO İKTİSAT,3,4
+İŞL102,YÖNETİM VE ORGANİZASYON,3,4
+İŞL112,MUHASEBEYE GİRİŞ,3,5
+İŞL116,İŞLETME MATEMATIĞİ,3,5
+KAM101,HUKUKA GİRİŞ,3,4
+TRD110,TÜRK DİLİ-2,2,2
+YBS102,YÖNETİM BİLİŞİM SİSTEMLERİ,3,4
+YD108,İNGİLİZCE 2,2,2
+AİT209,ATATÜRK İLKELERİ VE İNK.TARİHİ,2,2
+İŞL201,PAZARLAMAYA GİRİŞ,3,5
+İŞL207,MESLEKİ İNGİLİZCE,3,4
+İŞL211,ÜRETİM VE İŞLEMLER YÖNETİMİ,3,5
+İŞL213,İŞLETME İSTATİSTİĞİ,3,4
+İŞL215,FİNANSAL MUHASEBE,3,5
+İŞL217,ÖRGÜT TEORİSİ,3,5
+AİT210,ATATÜRK İLKELERİ VE İNKILAP TARİHİ-2,2,2
+İŞL202,PAZARLAMA YÖNETİMİ,3,5
+İŞL206,İŞLETME ANALİZİ VE PLANLAMASI,3,5
+İŞL208,İNSAN KAYNAKLARI YÖNETİMİ,3,5
+İŞL218,ULUSLARARASI İŞLETMECİLİK,3,4
+İŞL220,FİNANSAL YÖNETİM,3,5
+İŞL222,ÖRGÜTSEL DAVRANIŞ,3,4
+İŞL306,DİJİTAL PAZARLAMA,2,6
+İŞL318,ARAŞTIRMA YÖNTEMLERİ,3,6
+İŞL340,GİRİŞİMCİLİK,3,6
+İŞL314,PROJE YÖNETİMİ,3,6
+İŞL324,ŞİRKETLER MUHASEBESİ,3,6
+İŞL338,HİZMET PAZARLAMASI,3,6
+İŞL342,BİLGİSAYAR DESTEKLİ MUHASEBE,3,6
+İŞL344,LİDERLİK VE MOTİVASYON,3,6
+İŞL401,PAZARLAMA ARAŞTIRMALARI,3,6
+İŞL405,MESLEKİ UYGULAMA,3,6
+İŞL406,TEKNOLOJİ VE YENİLİK YÖNETİMİ,3,6
+İŞL412,ULUSLARARASI PAZARLAMA,3,6
+İŞL413,LOJİSTİK VE TEDARİK ZİNCİRİ YÖNETİMİ,3,6
+İŞL443,YÖNETİM BEKLENTİLERİ VE PRAKTİKLERİ,3,6
+İŞL445,FINANSAL ARAŞTIRMALAR VE KURUMLAR,3,6
+İY201,KAMU MALİYESİ,3,6
+İŞL440,PAZARLAMA ARAŞTIRMALARI,3,6
+İŞL444,AR-GE VE YENİLİK YÖNETİMİ,3,6
+İŞL453,YÖNETİMSEL DÜŞÜNCE GÜNCEL KONULAR,3,6
+İŞL463,PAZARLAMA ARAŞTIRMALARI GÜNCEL KONULAR,3,6
+İŞL467,E-TİCARET,3,6
+İŞL471,MAKİNE ÖĞRENMESİ,3,6
+İŞL473,BÜYÜK VERİ ANALİZİ,3,6
+İŞL475,OYUN TASARIMI VE PROG.,3,6
+"Ders Kodu","Ders Adı","Kredi","AKTS"
+"AiİT1","Atatürk İlkeleri ve İnkılap Tarihi I",1,1
+"İŞL 101","Davranış Bilimleri",3,4
+"İŞL 103","Genel Muhasebe I",3,4
+"HF 105","Hukukun Temel Kavramları",3,4
+"İKT 107","İktisada Giriş I",3,4
+"YD 113","İngilizce Dil Bilgisi I",4,5
+"EKO 109","Matematik I",3,4
+"YBS111","Temel Bilgi Teknolojileri",2,3
+"TD1","Türk Dili I",1,1
+"AiİT2","Atatürk İlkeleri ve İnkılap Tarihi II",1,1
+"İŞL 102","Genel Muhasebe II",3,5
+"İKT104","İktisada Giriş II",3,5
+"YD112","İngilizce Dil Bilgisi II",4,5
+"İŞL 106","İşletme Bilimlerine Giriş",3,4
+"EKO108","Matematik II",3,5
+"TD2","Türk Dili II",1,1
+"İŞL 110","Yönetim ve Organizasyon",3,4
+"YD207","İngilizce Dinleme ve Konuşma",4,5
+"İŞL201","İnsan Kaynakları Yönetimi",3,5
+"EKO203","İstatistik I",3,5
+"İŞL205","Pazarlama Yönetimi",3,5
+"HF209","Ticaret Hukuku",2,3
+"TDU211","Toplumsal Duyarlılık",2,3
+"İSEÇ215","Çalışma Yaşamında Davranış",3,4
+"İSEÇ211","Güncel Pazarlama Uygulamaları",3,4
+"İSEÇ216","Kriz Ortamlarında Stres Yönetimi",3,4
+"İSEÇ214","Psikolojik Şiddet",3,4
+"İSEÇ212","Sermaye Piyasası ve Kurumları",3,4
+"İSEÇ210","Şirketler Muhasebesi",3,4
+"ÜSD","Üniversite Seçmeli I",2,3
+"İŞL301","Finansın Temel İlkeleri",4,7
+"İŞL303","Maliyet Muhasebesi I",4,6
+"YD307","Mesleki İngilizce I",3,4
+"EKO305","Yöneylem Araştırması",3,6
+"İSEÇ319","Bütünleşik Pazarlama",3,4
+"İSEÇ315","Çatışma Yönetimi",3,4
+"İSEÇ317","Etkili İletişim Teknikleri",3,4
+"İSEÇ309","Menkul Kıymetler Yönetimi",3,4
+"İSEÇ313","Örgütsel Davranış",3,4
+"İSEÇ311","Risk Yönetimi",3,4
+"ÜSD","Üniversite Seçmeli II",2,3
+"İŞL302","Finansal Yönetim",3,4
+"İŞL304","Maliyet Muhasebesi II",4,6
+"YD308","Mesleki İngilizce II",3,4
+"İŞL306","Pazarlama Araştırması",3,5
+"İSEÇ314","Bilgisayar Destekli Muhasebe",3,4
+"İSEÇ310","Çağdaş Yönetim Teknikleri",3,4
+"İSEÇ318","Girişimcilik",3,4
+"İSEÇ324","Modern Üretim Teknikleri",3,4
+"İSEÇ320","Örgüt Geliştirme",3,4
+"İSEÇ312","Örgüt Kültürü",3,4
+"İSEÇ316","Satış Yönetimi",3,4
+"İSEÇ322","Sürdürülebilir Kalkınma",3,4
+"ÜSD","Üniversite Seçmeli III",2,3
+"İŞL401","Mali Tablolar Analizi",4,7
+"İŞL403","Uluslararası İşletme Yönetimi",3,6
+"İŞL405","Üretim Yönetimi I",3,6
+"İSEÇ409","Dağıtım Kanalları",3,4
+"İSEÇ411","Dünya Ekonomisi",3,4
+"FSEÇ425","Ekonomik Bütünleşme ve AB",3,4
+"İSEÇ417","Finansal Vaka Analizi",3,4
+"İSEÇ421","İşletmelerde Bilgi Sistemleri",3,4
+"İSEÇ419","Kurumsal Girişimcilik",3,4
+"İSEÇ425","Kurumsal İtibar Yönetimi",3,4
+"İSEÇ413","Küresel Dünyada Göç",3,4
+"İSEÇ423","Modern Liderlik Teorileri",3,4
+"İSEÇ407","Tüketici Davranışları",3,4
+"ÜSD","Üniversite Seçmeli IV",2,3
+"İSEÇ415","Yatırım ve Proje Yönetimi",3,4
+"İŞL402","Denetim",4,7
+"İŞL406","Stratejik Yönetim",3,6
+"İŞL404","Üretim Yönetimi II",3,6
+"İSEÇ410","Hizmet Pazarlaması",3,4
+"İSEÇ412","İşletmelerde Yasal İşlemler",3,4
+"İSEÇ414","Kurumsal Sosyal Sorumluluk ve İş Ahlakı",3,4
+"İSEÇ416","Örgüt Kuramı",3,4
+"İSEÇ408","Uluslararası Finansal Yönetim",3,4
+"ÜSD","Üniversite Seçmeli V",2,3
+"İSEÇ412","Yenilik Yönetimi",3,4
+"Kod","Ders Adı","Kredi","AKTS"
+"IKT1203","İKTİSADA GİRİŞ",3,5
+"ISL1001","İŞLETME I",3,5
+"ISL1003","KARİYER PLANLAMA",1,1
+"ISL1201","MUHASEBE I",3,5
+"ISL1401","İŞLETME MATEMATIĞI I",3,5
+"KAM1103","SOSYOLOJİ",3,4
+"ATA101","ATATÜRK İLKELERİ VE İNKILAP TARİHİ I",2,2
+"TUD101","TÜRK DİLİ I",2,2
+"YAD101","YABANCI DİL I (İNGİLİZCE)",2,2
+"IKT1204","MİKRO İKTİSAT",3,5
+"ISL1002","İŞLETME II",3,5
+"ISL1202","MUHASEBE II",3,5
+"ISL1402","İŞLETME MATEMATIĞI II",3,5
+"KAM1404","HUKUKA GİRİŞ",3,4
+"ATA102","ATATÜRK İLKELERİ VE İNKILAP TARİHİ II",2,2
+"TUD102","TÜRK DİLİ II",2,2
+"YAD102","YABANCI DİL II (İNGİLİZCE)",2,2
+"EKO2207","BETİMSEL İSTATİSTİK",3,5
+"IKT2105","MAKRO İKTİSAT",3,5
+"ISL2101","YÖNETİM",3,5
+"ISL2213","MALİ TABLOLAR ANALİZİ",3,5
+"ISL2301","TÜKETİCİ DAVRANIŞLARI",3,5
+"CAL2202","İŞ HUKUKU",3,5
+"EKO2204","ÇIKARIMSAL İSTATİSTİK",3,5
+"ISL2104","ORGANİZASYON TEORİSİ",3,5
+"ISL2212","FİNANSA GİRİŞ",3,5
+"MLY2406","TÜRK VERGİ SİSTEMİ",3,5
+"ISL3105","İNSAN KAYNAKLARI YÖNETİMİ",3,5
+"ISL3201","FİNANSAL YÖNETİM",3,5
+"ISL3205","MALİYET MUHASEBESİ",3,5
+"ISL3301","PAZARLAMA YÖNETİMİ",3,5
+"ISL3006","ARAŞTIRMA YÖNTEMLERİ",3,5
+"ISL3208","YÖNETİM MUHASEBESİ",3,5
+"ISL3304","ÜRETİM YÖNETİMİ",3,5
+"ISL3502","TİCARET HUKUKU",3,5
+"ISL4003","GÜNCEL KONULAR",3,5
+"ISL4101","ÖRGÜTSEL DAVRANIŞ",3,5
+"ISL4401","SAYISAL YÖNTEMLER I",3,5
+"ISL4302","ÜRETİM PLANLAMA",3,5
+"ISL4316","PAZARLAMA STRATEJİLERİ",3,5
+"ISL4402","SAYISAL YÖNTEMLER II",3,5
+"CAL2101","SOSYAL POLİTİKA",3,5
+"EKO2003","OFİS PROGRAMLARI HESAP TABLOLARI",3,5
+"ISL2203","FİNANS MATEMATİĞİ",3,5
+"ISL2205","ENVANTER İŞLEMLERİ",3,5
+"ISL2207","ŞİRKETLER MUHASEBESİ",3,5
+"ISL2301","TURİZM İŞLETMECİLİĞİ",3,5
+"ISL2311","GİRİŞİMCİLİK",3,5
+"KAM2203","KAMU YÖNETİMİ",3,5
+"MLY2107","KAMU MALİYESİ",3,5
+"EKO2004","OFİS PROGRAMLARI -KELİME İŞLEM",3,5
+"EKO2206","NİCEL VERİ ANALİZİ",3,5
+

@@ -1,0 +1,160 @@
+KOD,AD,KREDİ,AKTS
+BMÜ450,BİYOINFORMATİK,3,6
+BMÜ454,DERLEYİCİ TASARIMI,3,6
+BMÜ456,KUANTUM HESAPLAMA,3,6
+BMÜ462,SİSTEM MÜHENDİSLİĞİ,3,6
+BMÜ464,COĞRAFİ BİLGİ SİSTEMLERİ,3,6
+BMÜ466,ROBOTİK VE OTONOM SİSTEMLER,3,6
+BMÜ470,BİLGİSAYAR DESTEKLİ TASARIM,3,6
+BMÜ472,SİBER GÜVENLİK,3,6
+BMÜ480,GİRİŞİMCİLİK,2,4
+BMÜ482,İŞ SAĞLIĞI VE GÜVENLİĞİ,2,4
+EEM482,FİBEROPTİK HABERLEŞME,2,6
+İŞL482,FİNANS,2,4
+İŞL484,TOPLAM KALİTE YÖNETİMİ,2,4
+SOS486,YÖNETİM SOSYOLOJİSİ,2,4
+HZR111,İNGİLİZCE HAZIRLIK,0,0
+BMÜ401,BİLGİSAYAR MÜH.TASARIM,2,5
+BMÜ411,SİMÜLASYON VE MODELLERME,2,6
+BMÜ493,MESLEKİ UYGULAMA-2,0,2
+BMÜ459,İŞ HUKUKU,2,3
+SOS4G,SOSYAL4,2,3
+TKNK4G,TEKNİK4G,3,6
+BMÜ451,DUYARGA AĞLARI,3,6
+BMÜ453,VERİ MADENCİLİĞİ,3,6
+BMÜ455,BİLGİSAYAR MİMARİSİ,3,6
+BMÜ457,AĞ GÜVENLİĞİ,3,6
+BMÜ499,BLOKZİNCİR TEKNOLOJİSİ,3,6
+BMÜ461,SOSYAL AĞ ANALİZİ,3,6
+BMÜ463,PARALEL VE DAĞITIK SİSTEMLER,3,6
+BMÜ465,OPTİMİZASYON TEKNİKLERİ,3,6
+BMÜ467,MOBİL UYGULAMALAR,3,6
+BMÜ469,MEDİKAL GÖRÜNTÜ İŞLEME,3,6
+BMÜ477,DİJİTAL DÖNÜŞÜMÜN TEMELLERİ,2,6
+HİT475,SOSYAL MEDYA VE ETİK,2,6
+İŞL473,İŞLETME YÖNETİMİ,2,6
+İŞL479,İNSAN KAYNAKLARI YÖNETİMİ,2,3
+"Kod","Ders Adı","Kredi","AKTS"
+"BIM-101","Bilgisayar Mühendisliğine Giriş",2,4
+"FIZ-101","Fizik I",3,6
+"KIM-101","Genel Kimya",3,6
+"MAT-101","Matematik I",3,6
+"BIM-103","Programlamaya Giriş",3,7
+"YDY-101","Yabancı Dil I",1,1
+"BIM-102","Ayrık Matematik",2,5
+"FIZ-102","Fizik II",3,6
+"BIM-106","Lineer Cebir",2,5
+"MAT-102","Matematik II",3,6
+"BIM-104","Nesneye Yönelik Programlama",3,7
+"YDY-102","Yabancı Dil II",1,1
+"MAT 201","Diferansiyel Denklemler",2,5
+"BIM 205","Görsel Programlama",3,6
+"BIM 207","Programlama Dilleri",3,6
+"BIM 201","Sayısal Tasarım",3,6
+"TDE 201","Türk Dili I",1,1
+"BIM-203","Veri Yapıları ve Algoritmalar",3,6
+"BIM 202","Bilgisayar Organizasyonu ve Tasarımı",2,5
+"BIM 208","Elektronik Devreler",3,6
+"BIM 204","İleri Programlama",2,5
+"MUH IST","İstatistik ve Olasılık",2,4
+"BIM 210","Sinyaller ve Sistemler",2,4
+"TDE-202","Türk Dili II",1,1
+"BIM 206","Web Programlama",2,5
+"AIT-301","Atatürk İlkeleri ve İnkılap Tarihi I",1,1
+"BIM 309","Bilgisayar Grafiği",2,4
+"BIM 301","İşletim Sistemleri",3,5
+"BIM 305","Mikrodenetleyiciler",3,6
+"BIM 307","Veri Tabanı Yönetim Sistemleri",3,5
+"BIM 303","Yazılım Mühendisliği",3,5
+"BIM 302","Algoritmaların Tasarımı ve Analizi",2,5
+"AIT-302","Atatürk İlkeleri ve İnkılap Tarihi II",1,1
+"BIM 306","Bilgisayar Ağları",3,6
+"BIM 310","Kontrol Sistemleri",2,4
+"BIM 304","Otomata Teorisi",2,5
+"BIM 308","Paralel Programlamaya Giriş",2,5
+"BIS 403","Bilgisayar Mühendisliği Seçmeli Tasarım",3,7
+"BIM 405","Bitirme Projesi I",2,4
+"MUH-IS1","İş Sağlığı ve Güvenliği I",1,1
+"BIM 401","Mobil Programlama",3,6
+"MUH EKO","Mühendislik Ekonomisi",2,3
+"BIM-408","Bilgisayar Mühendisliği Laboratuvarı",1,3
+"BIS-404","Bilgisayar Mühendisliği Seçmeli Tasarım II",3,6
+"BIM-410","Bilgisayar Mühendisliği Uygulamaları",2,4
+"MUH-UME","Uygulamalı Mühendislik Eğitimi",10,30
+"Kod","Ders Adı","Kredi","AKTS"
+"BMB1001","Bilgisayar Sistemleri ve Algoritmaya Giriş",5,6
+"BMB1003","Kariyer Planlama",1,1
+"FZK1071","Temel Fizik I",5,6
+"KIM1077","Genel Kimya",4,6
+"MAT1071","Matematik I",5,6
+"03YAD101","Yabancı Dil I (İngilizce)",2,2
+"ATA101","Atatürk İlkeleri ve İnkılap Tarihi I",2,2
+"TUD101","Türk Dili I",2,2
+"BMB1002","Bilgisayar Programlamaya Giriş",4,6
+"FZK1072","Temel Fizik II",5,6
+"MAT1072","Matematik II",5,6
+"MAT1078","Lineer Cebir",5,6
+"03YAD102","Yabancı Dil II (İngilizce)",2,2
+"ATA102","Atatürk İlkeleri ve İnkılap Tarihi II",2,2
+"TUD102","Türk Dili II",2,2
+"BMB2005","Mantık Devreleri",3,7
+"BMB2009","Nesneye Yönelik Programlama",4,7
+"BMB2011","Ayrık Matematik",3,7
+"ISG201","İş Sağlığı ve Güvenliği I",2,2
+"MAT2017","Olasılık ve İstatistik",3,4
+"BMB2004","Biçimsel Diller ve Otomata",3,5
+"BMB2006","Veri Yapıları",4,6
+"BMB2012","Elektronik Devreler ve Aygıtlar",3,6
+"ISG202","İş Sağlığı ve Güvenliği II",2,2
+"BMB2008","Mobil Programlama Teknikleri",3,5
+"BMB2010","Mantıksal Programlama",3,5
+"BMB2014","Python Programlamaya Giriş",3,5
+"BMB2016","Yöneylem Araştırması",3,5
+"BMB2018","Bilgisayar Oyunları ve Simülasyon",3,5
+"BEB4038","Masa Tenisi II",2,3
+"BMB3001","Veri Tabanı Yönetim Sistemleri",3,5
+"BMB3003","Algoritma Analizi",4,6
+"BMB3007","Bilgisayar Ağları",3,6
+"BMB3009","Bilgisayar Mimarisi",3,5
+"PRJ3001","Proje Kültürü",1,1
+"BMB3013","İleri Veri Yapıları",3,5
+"BMB3015","Yapay Zeka",3,5
+"BMB3017","Bilgi Sistemlerinin Analizi ve Tasarımı",3,5
+"MAT3044","Nümerik Analiz",3,5
+"MAK2027","Mühendislik Etiği",2,3
+"MAK3028","Patent ve Endüstriyel Tasarım",2,3
+"TEK4302","Performans Değerlendirme Sistemi",2,3
+"BMB3004","Bilgisayar İşletim Sistemleri",3,5
+"BMB3006","Yazılım Mühendisliği",3,6
+"BMB3008","Sunum Yöntemleri",2,4
+"BMB3010","Mikroişlemciler",4,5
+"BMB3012","Sinyaller ve Sistemler",3,5
+"BMB3016","Görsel Programlama",3,5
+"BMB3018","Sistem Programlama",3,5
+"BMB3020","Uygulamalı Sinir Ağları",3,5
+"BMB3022","Bilgisayar Grafikleri",3,5
+"EEM3702","İş Hayatı İçin Yabancı Dil",2,3
+"BMB4001","Staj I",0,5
+"BMB4003","Tasarım Dersi",4,10
+"BMB4007","Dağıtımlı Sistemlerde Paralel Programlama",3,5
+"BMB4009","Yazılım Kalitesi ve Sınaması",3,5
+"BMB4011","Bilgisayar Ağlarında Özel Konular",3,5
+"BMB4013","Dijital Görüntü İşleme",3,5
+"BMB4015","Sanal Gerçeklik ve Artırılmış Gerçeklik",3,5
+"BMB4017","Biyoinformatik Algoritmalara Giriş",3,5
+"BMB4019","Robot Tasarımı ve Uygulamaları",3,5
+"BMB4021","Veri İletişimi",3,5
+"EEM4433","Sayısal İşaret İşleme",3,5
+"BMB4002","Staj II",0,5
+"BMB4004","Bitirme Projesi",2,9
+"BMB4006","Seminer",1,1
+"BMB4008","Mühendislikte Proje Yönetimi",3,5
+"BMB4012","Dil İşleyiciler",3,5
+"BMB4014","Gömülü Sistemler",3,5
+"BMB4016","Bilgisayar ve Ağ Güvenliği",3,5
+"BMB4018","Örüntü Tanıma",3,5
+"BMB4020","Genomik Hesaplama",3,5
+"BMB4022","Çoğulortam Hesaplama",3,5
+"BMB4024","Sunucu Yazılım Teknolojileri",3,5
+"BMB4026","Doğal Dil İşlemeye Giriş",3,5
+

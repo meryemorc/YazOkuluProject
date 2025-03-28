@@ -1,0 +1,128 @@
+KOD,AD,KREDİ,AKTS
+H107,Anatomi,4,5
+H103,Beslenme İlkeleri,3,4
+H111,Biyokimya,3,4
+H109,Fizyoloji,4,5
+H101,Hemşirelik Felsefesi ve Temel Kavramlar,3,4
+H105,İletişim Becerileri,2,3
+H113,Türk Dili I,1,1
+H115,Yabancı Dil I,1,1
+HEM197,Sağlık Eğitimi,2,3
+HEM182,Sağlık Okur Yazarlığı,2,3
+HEM109,Yaşam Modeli,2,3
+H106,Farmakoloji,3,4
+H108,Mikrobiyoloji,2,3
+H104,Sağlığı Değerlendirme,5,6
+H102,Temel Hemşirelik Bakımı ve Klinik Beceriler,8,12
+H110,Türk Dili II,1,1
+H112,Yabancı Dil II,1,1
+HEM104,Etkili Sunum Teknikleri,2,3
+HEM106,İş Hayatı Yönetimi,2,3
+HEM102,Stres ve Kriz Yönetimi,2,3
+H229,Atatürk İlkeleri ve İnkılap Tarihi I,1,1
+H221,Hemşirelik Esasları,6,12
+H203,Hemşirelikte Öğretim,3,5
+H231,Mesleki İngilizce I,1,1
+H227,Patoloji,2,3
+H225,Sosyoloji,1,2
+ÜSD-1,Üniversite Seçmeli I,2,3
+H226,Atatürk İlkeleri ve İnkılap Tarihi II,1,1
+H220,Cerrahi Hastalıkları ve Hemşirelik Bakımı,5,10
+H206,Hemşirelikte Etik,1,2
+H222,İç Hastalıkları Hemşirelik Bakımı,5,10
+H228,Mesleki İngilizce II,1,1
+ÜSD-2,Üniversite Seçmeli II,2,3
+H333,Çocuk Sağlığı Hastalıkları ve Hemşirelik Bakımı,5,10
+H331,Doğum Kadın Sağlığı Hastalıkları ve Hemşirelik Bakımı,5,10
+H337,Epidemiyoloji,2,3
+H335,İlk Yardım ve Acil Bakım Hemşireliği,2,4
+H334,Araştırma Yöntemleri,2,4
+H336,Cinsel Sağlık,2,3
+H330,Halk Sağlığı Hemşireliği,5,10
+H332,Psikiyatri Hemşireliği,5,10
+ÜSD-3,Üniversite Seçmeli III,2,3
+H401,Hemşirelik Uygulaması I,12,24
+H403,Hemşirelikte Yönetim,3,6
+H402,Hemşirelik Uygulaması II,12,24
+ÜSD-4,Üniversite Seçmeli IV,2,3
+"Kod","Ders Adı","Kredi","AKTS"
+"HEM1003","Anatomi",4,6
+"HEM1005","Fizyoloji",2,3
+"HEM1009","Hemşirelikte Kişiler Arası İlişkiler",2,3
+"HEM1017","Mikrobiyoloji ve Parazitoloji",2,3
+"HEM1019","Biyokimya",2,3
+"HEM1023","Histoloji",2,3
+"HEM1025","Kariyer Planlama",1,1
+"PSİ1071","Psikolojiye Giriş I",2,3
+"ATA101","Atatürk İlkeleri ve İnkılap Tarihi I",2,2
+"TUD101","Türk Dili I",2,2
+"YAD101","Yabancı Dil I (İngilizce)",2,2
+"HEM1002","Hemşirelik Esasları",19,13
+"HEM1016","Farmakoloji",2,3
+"HEM1018","Patoloji",2,3
+"HEM1020","Toplumsal Duyarlılık",1,2
+"HEM1022","Beslenme",2,3
+"ATA102","Atatürk İlkeleri ve İnkılap Tarihi II",2,2
+"TUD102","Türk Dili II",2,2
+"YAD102","Yabancı Dil II (İngilizce)",2,2
+"HEM2103","HEMŞİRELİKTE TEKNOLOJİ KULLANIMI",2,3
+"HEM2201","HEMŞİRELİK FELSEFESİ",2,3
+"HEM2203","HEMŞİRELİKTE ERGONOMİ VE KONFOR",2,3
+"HEM2205","DİYABET HEMŞİRELİĞİ",2,3
+"HEM2207","HEMŞİRELİKTE LİDERLİK",2,3
+"HEM2209","HEMŞİRELİK SÜRECİ",2,3
+"HEM2211","TAMAMLAYICI TEDAVİLER",2,3
+"HEM2213","OSTOMİ HEMŞİRELİĞİ",2,3
+"HEM2217","HEMŞİRELİKTE İNOVATİF YÖNETİM TEKNİKLERİ",2,3
+"HEM2219","KÜLTÜRLERARASI HEMŞİRELİK",2,3
+"BTK3627","TARLA BİTKİLERİ HASTALIK VE ZARARLILARI",2,3
+"FTR2021","FİZİKSEL AKTİVİTE VE SAĞLIKLI YAŞAM",2,3
+"HEM2001","Dahili Hastalıklar Hemşireliği",5,9
+"HEM2019","Hemşirelikte Öğretim",2,3
+"HEM2104","EPİDEMİYOLOJİ",2,3
+"HEM2202","GERİATRİ HEMŞİRELİĞİ",2,3
+"HEM2204","DİYALİZ HEMŞİRELİĞİ",2,3
+"HEM2206","KARDİYOLOJİ HEMŞİRELİĞİ",2,3
+"HEM2210","ÖZEL DURUMLARDA BESLENME",2,3
+"HEM2212","YARA BAKIMI",2,3
+"HEM2214","İLETİŞİM YÖNTEMLERİ",2,3
+"HEM2218","SAĞLIK HUKUKU",2,3
+"HEM2220","BÜYÜME-GELİŞME",2,3
+"HEM2222","SAĞLIK EĞİTİMİ",2,3
+"HEM2224","TEMEL ONKOLOJİ HEMŞİRELİĞİ",2,3
+"HEM2226","PALYATİF BAKIM",2,3
+"PRJ3001","PROJE KÜLTÜRÜ",1,1
+"HEM3201","YENİDOĞAN HEMŞİRELİĞİ",2,3
+"HEM3205","YOĞUN BAKIM HEMŞİRELİĞİ",2,3
+"HEM3209","AİLE PLANLAMASI VE CİNSEL EĞİTİM",2,3
+"HEM3213","SAĞLIK POLİTİKALARI",2,3
+"HEM3215","EVDE HASTA BAKIMI",2,3
+"HEM3217","İŞ YERİ HEMŞİRELİĞİ",2,3
+"HEM3219","TEMEL LİYEZON HEMŞİRELİĞİ",2,3
+"HEM3221","HEMŞİRELİKTE SİMÜLASYON KULLANIMI",2,3
+"HEM3223","HASTA GÜVENLİĞİ",2,3
+"HEM3225","İNFÜZYON HEMŞİRELİĞİ",2,3
+"BAH3119","ORGANİK TARIM",2,3
+"BAH3125","SÜS BİTKİLERİNE GİRİŞ",2,3
+"BDY4103","FONKSİYONEL GIDALAR VE BESLENME",2,3
+"BTK4625","PESTİSİTLER VE ÇEVRE",2,3
+"HEM3206","ANA ÇOCUK SAĞLIĞI",2,3
+"HEM3218","KARŞILAŞTIRMALI SAĞLIK SİSTEMLERİ",2,3
+"HEM3220","ÇOCUK ERGEN RUH SAĞLIĞI HEMŞİRELİĞİ",2,3
+"HEM3222","DOĞUM ÖNCESİ HAZIRLIK",2,3
+"HEM3224","İNFERTİLİTE HEMŞİRELİĞİ",2,3
+"HEM3228","ÇOCUK ACİLLERDE HEMŞİRELİK YAKLAŞIMI",2,3
+"BAH3110-S","EGZOTİK MEYVELER",2,3
+"BAH4130","İÇ MEKAN SÜS BİTKİLERİ",2,3
+"BDY4202","GIDA GÜVENLİĞİ VE SAĞLIKLI BESLENME",2,3
+"OKU3102","ÇOCUK İHMALİ VE İSTİSMARI",2,3
+"RES3510","İLETİŞİM VE BEDEN DİLİ",2,3
+"SOS3108","BURSA TARİHİ",2,3
+"SSY3016","KİTLE İLETİŞİM TEORİLERİ",2,3
+"SSY3066","TEKNOLOJİ TARTIŞMALARI VE TOPLUM",2,3
+"YAD256","HEMŞİRELİKTE İNGİLİZCE METİN OKUMA",2,3
+"HEM4007","MESLEKİ EĞİTİM UYGULAMASI I",40,25
+"HEM4009","HEMŞİRELİKTE YÖNETİM",5,5
+"HEM4008","MESLEKİ EĞİTİM UYGULAMASI II",40,25
+"HEM4010","HEMŞİRELİKTE SORUN ÇÖZME YÖNTEMLERİ",2,5
+
