@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace YazOkuluAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250331095039_AddYgCourseTable")]
-    partial class AddYgCourseTable
+    [Migration("20250331095721_SyncWithExistingDb")]
+    partial class SyncWithExistingDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
