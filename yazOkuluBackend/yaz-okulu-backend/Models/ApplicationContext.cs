@@ -16,6 +16,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Course> courses { get; set; }
     public DbSet<CourseEnrollment> course_enrollments { get; set; }
     public DbSet<Comment> comments { get; set; }
+    public DbSet<YgCourse> ygCourses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
