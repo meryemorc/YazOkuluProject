@@ -6,19 +6,18 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace YazOkuluAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class SyncWithExistingDb : Migration
+    public partial class AddYgDepartment : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            
+           
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-    {
-        // intentionally left blank
-    }
-
+        {
+            
+        }
     }
 }

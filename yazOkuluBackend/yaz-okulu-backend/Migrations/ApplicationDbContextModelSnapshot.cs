@@ -267,7 +267,28 @@ namespace YazOkuluAPI.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("yatay_gecis_courses");
+                    b.ToTable("yatay_gecis_courses", (string)null);
+                });
+
+            modelBuilder.Entity("yaz_okulu_backend.Models.YgDepartment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<string>("department_name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("faculty_id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("yatay_gecis_departments", (string)null);
                 });
 
             modelBuilder.Entity("Comment", b =>

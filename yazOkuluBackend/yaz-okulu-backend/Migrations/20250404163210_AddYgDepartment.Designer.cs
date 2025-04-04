@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace YazOkuluAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250315111849_UpdateUserModel")]
-    partial class UpdateUserModel
+    [Migration("20250404163210_AddYgDepartment")]
+    partial class AddYgDepartment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,22 +28,27 @@ namespace YazOkuluAPI.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CommentText")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("comment_text");
 
                     b.Property<int>("CourseId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("course_id");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -92,18 +97,22 @@ namespace YazOkuluAPI.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CourseId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("course_id");
 
                     b.Property<DateTime>("EnrollmentDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("enrollment_date");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
                     b.HasKey("Id");
 
@@ -222,6 +231,67 @@ namespace YazOkuluAPI.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("users", (string)null);
+                });
+
+            modelBuilder.Entity("yaz_okulu_backend.Models.YgCourse", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int>("akts")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("compulsory")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("course_code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("course_name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("department_id")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("kredi")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("semester")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("yatay_gecis_courses", (string)null);
+                });
+
+            modelBuilder.Entity("yaz_okulu_backend.Models.YgDepartment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<string>("department_name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("faculty_id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("yatay_gecis_departments", (string)null);
                 });
 
             modelBuilder.Entity("Comment", b =>

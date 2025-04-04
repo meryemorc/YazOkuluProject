@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema; // [Table], [ForeignKey] gib
 
 namespace yaz_okulu_backend.Models
 {
-    [Table("yatay_gecis_courses")] // PostgreSQL tablo adı
+    [Table("yatay_gecis_courses")] 
     public class YgCourse
     {
         [Key]

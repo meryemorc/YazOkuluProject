@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace YazOkuluAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250331095721_SyncWithExistingDb")]
-    partial class SyncWithExistingDb
+    [Migration("20250404162417_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -270,7 +270,7 @@ namespace YazOkuluAPI.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("yatay_gecis_courses");
+                    b.ToTable("yatay_gecis_courses", (string)null);
                 });
 
             modelBuilder.Entity("Comment", b =>
