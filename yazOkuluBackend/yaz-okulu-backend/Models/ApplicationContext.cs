@@ -18,6 +18,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Comment> comments { get; set; }
     public DbSet<YgCourse> ygCourses { get; set; }
     public DbSet<YgDepartment> ygDepartments { get; set; }
+    public DbSet<YgFaculty> ygFaculties { get; set; }
+
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,6 +36,8 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Comment>().ToTable("comments");
         modelBuilder.Entity<YgCourse>().ToTable("yatay_gecis_courses");
         modelBuilder.Entity<YgDepartment>().ToTable("yatay_gecis_departments");
+        modelBuilder.Entity<YgFaculty>().ToTable("yatay_gecis_faculties");
+
 
 
     }
