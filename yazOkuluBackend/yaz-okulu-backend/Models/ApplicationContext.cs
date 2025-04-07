@@ -19,6 +19,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<YgCourse> ygCourses { get; set; }
     public DbSet<YgDepartment> ygDepartments { get; set; }
     public DbSet<YgFaculty> ygFaculties { get; set; }
+    public DbSet<YgUniversity> ygUniversities { get; set; }
+    public DbSet<Muafiyet> muafiyet { get; set; }
 
 
 
@@ -37,6 +39,8 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<YgCourse>().ToTable("yatay_gecis_courses");
         modelBuilder.Entity<YgDepartment>().ToTable("yatay_gecis_departments");
         modelBuilder.Entity<YgFaculty>().ToTable("yatay_gecis_faculties");
+        modelBuilder.Entity<YgUniversity>().ToTable("yatay_gecis_universities");
+        modelBuilder.Entity<Muafiyet>().ToTable("yatay_gecis_ders_muafiyet");
 
 
 
