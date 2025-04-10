@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace YazOkuluAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250404163210_AddYgDepartment")]
-    partial class AddYgDepartment
+    [Migration("20250409135322_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -233,6 +233,55 @@ namespace YazOkuluAPI.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("YgUniversity", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("yatay_gecis_universities", (string)null);
+                });
+
+            modelBuilder.Entity("yaz_okulu_backend.Models.Muafiyet", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<DateTime>("created_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("is_equivalent")
+                        .HasColumnType("boolean");
+
+                    b.Property<double>("similarity_score")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("source_course_id")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("target_course_id")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("user_id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("yatay_gecis_ders_muafiyet", (string)null);
+                });
+
             modelBuilder.Entity("yaz_okulu_backend.Models.YgCourse", b =>
                 {
                     b.Property<int>("id")
@@ -292,6 +341,27 @@ namespace YazOkuluAPI.Migrations
                     b.HasKey("id");
 
                     b.ToTable("yatay_gecis_departments", (string)null);
+                });
+
+            modelBuilder.Entity("yaz_okulu_backend.Models.YgFaculty", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<int>("university_id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("yatay_gecis_faculties", (string)null);
                 });
 
             modelBuilder.Entity("Comment", b =>

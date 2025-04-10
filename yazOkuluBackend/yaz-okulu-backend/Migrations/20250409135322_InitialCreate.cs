@@ -12,6 +12,7 @@ namespace YazOkuluAPI.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+           
         }
 
         /// <inheritdoc />
