@@ -1,15 +1,49 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://10.0.2.2:5275/api/Auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        Alert.alert("Başarılı", "Giriş başarılı!");
+        // navigation.navigate('Home'); // varsa yönlendirme
+      } else {
+        Alert.alert("Hata", "E-posta veya şifre hatalı.");
+      }
+    } catch (error) {
+      Alert.alert("Sunucu Hatası", "API'ye ulaşılamıyor.");
+      console.error(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Giriş Yap</Text>
-      <TextInput style={styles.input} placeholder="Kullanıcı Adı" />
-      <TextInput style={styles.input} placeholder="Şifre" secureTextEntry />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Giriş</Text>
-      </TouchableOpacity>
+      <TextInput
+        placeholder="E-posta"
+        value={email}
+        onChangeText={setEmail}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Şifre"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
+      />
+      <Button title="Giriş Yap" onPress={handleLogin} />
     </View>
   );
 };
@@ -18,34 +52,11 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 30,
-    backgroundColor: '#f5f5f5',
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    textAlign: 'center',
-    fontWeight: 'bold',
+    padding: 20
   },
   input: {
-    height: 50,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 10,
+    borderBottomWidth: 1,
     marginBottom: 15,
-    paddingHorizontal: 15,
-    backgroundColor: '#fff',
-  },
-  button: {
-    backgroundColor: '#2196f3',
-    paddingVertical: 15,
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
+    padding: 10
+  }
 });
