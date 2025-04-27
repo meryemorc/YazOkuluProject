@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 const RegisterScreen = ({ navigation }) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('student'); // varsayılan
+  const [role, setRole] = useState('student');
 
   const handleRegister = async () => {
     try {
       const response = await fetch('http://10.0.2.2:5275/api/Users', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fullName, email, password, role })
       });
 
@@ -21,9 +19,9 @@ const RegisterScreen = ({ navigation }) => {
         Alert.alert("Başarılı", "Kayıt başarılı! Giriş yapabilirsiniz.");
         navigation.navigate('Login');
       } else {
-        const errorText = await response.text(); // ⬅️ burayı ekle
-        Alert.alert("Hata", `Kayıt başarısız.\n\nSunucu mesajı:\n${errorText}`);
-      }      
+        const errorText = await response.text();
+        Alert.alert("Hata", `Kayıt başarısız.\nSunucu mesajı:\n${errorText}`);
+      }
     } catch (error) {
       Alert.alert("Sunucu Hatası", "API'ye ulaşılamıyor.");
       console.error(error);
@@ -32,22 +30,52 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Kayıt Ol</Text>
+      <View style={styles.form}>
+        <Text style={styles.title}>Kayıt Ol</Text>
 
-      <TextInput placeholder="Ad Soyad" value={fullName} onChangeText={setFullName} style={styles.input} />
-      <TextInput placeholder="E-posta" value={email} onChangeText={setEmail} style={styles.input} />
-      <TextInput placeholder="Şifre" value={password} onChangeText={setPassword} secureTextEntry style={styles.input} />
-      <TextInput placeholder="Rol (student / assistant / admin)" value={role} onChangeText={setRole} style={styles.input} />
+        <TextInput
+          style={styles.input}
+          placeholder="Ad Soyad"
+          placeholderTextColor="#ccc"
+          value={fullName}
+          onChangeText={setFullName}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#ccc"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Şifre"
+          placeholderTextColor="#ccc"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Rol (student / assistant / admin)"
+          placeholderTextColor="#ccc"
+          value={role}
+          onChangeText={setRole}
+        />
 
-      <Button title="Kayıt Ol" onPress={handleRegister} />
+        <TouchableOpacity style={styles.button} onPress={handleRegister}>
+          <Text style={styles.buttonText}>Kayıt Ol</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.loginText}>Zaten hesabın var mı? Giriş Yap</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.linkText}>Zaten hesabın var mı? Giriş Yap</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
-        <Text style={styles.backText}>← Geri</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
+          <Text style={styles.backText}>← Ana Sayfa</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -56,29 +84,59 @@ export default RegisterScreen;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
     flex: 1,
-    justifyContent: 'center'
+    backgroundColor: '#0f0c29',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  form: {
+    backgroundColor: '#302b63',
+    padding: 30,
+    borderRadius: 15,
+    width: '85%',
+    shadowColor: '#000',
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 10 },
+    shadowRadius: 20,
+    elevation: 10,
   },
   title: {
-    fontSize: 28,
+    fontSize: 26,
+    color: '#fff',
     fontWeight: 'bold',
+    textAlign: 'center',
     marginBottom: 30,
-    textAlign: 'center'
   },
   input: {
-    borderBottomWidth: 1,
-    marginBottom: 15,
-    padding: 10
+    backgroundColor: '#eee',
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    paddingVertical: 12,
+    fontSize: 16,
+    marginBottom: 20,
   },
-  loginText: {
+  button: {
+    backgroundColor: '#573b8a',
+    paddingVertical: 15,
+    borderRadius: 8,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 17,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  linkText: {
     marginTop: 20,
-    color: '#007bff',
-    textAlign: 'center'
+    color: '#add8e6',
+    textAlign: 'center',
+    fontSize: 14,
   },
   backText: {
     marginTop: 10,
-    color: 'gray',
-    textAlign: 'center'
-  }
+    color: '#ccc',
+    textAlign: 'center',
+    fontSize: 14,
+  },
 });
