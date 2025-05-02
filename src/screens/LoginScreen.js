@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -9,14 +9,16 @@ const LoginScreen = ({ navigation }) => {
     try {
       const response = await fetch('http://10.0.2.2:5275/api/Auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ email, password })
       });
 
       if (response.ok) {
         const data = await response.json();
         Alert.alert("Başarılı", "Giriş başarılı!");
-        // navigation.navigate('Home'); // İstersen buraya yönlendirme yaparız.
+        navigation.navigate('Home'); // Başarılı giriş sonrası Home ekranına yönlendirme
       } else {
         Alert.alert("Hata", "E-posta veya şifre hatalı.");
       }
@@ -28,38 +30,33 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.form}>
-        <Text style={styles.title}>Giriş Yap</Text>
+      <Text style={styles.title}>Giriş Yap</Text>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor="#ccc"
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize="none"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Şifre"
-          placeholderTextColor="#ccc"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
+      <TextInput
+        placeholder="E-posta"
+        value={email}
+        onChangeText={setEmail}
+        style={styles.input}
+      />
+      <TextInput
+        placeholder="Şifre"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
+      />
 
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Giriş Yap</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Giriş Yap</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.linkText}>Hesabın yok mu? Kayıt Ol</Text>
-        </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text style={styles.registerText}>Hesabın yok mu? Kayıt Ol</Text>
+      </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
-          <Text style={styles.backText}>← Ana Sayfa</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Welcome')}>
+        <Text style={styles.backText}>← Ana Sayfa</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -68,59 +65,45 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
+    padding: 20,
     flex: 1,
-    backgroundColor: '#0f0c29',
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  form: {
-    backgroundColor: '#302b63',
-    padding: 30,
-    borderRadius: 15,
-    width: '85%',
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 0, height: 10 },
-    shadowRadius: 20,
-    elevation: 10,
+    backgroundColor: '#f8f9fa'
   },
   title: {
-    fontSize: 26,
-    color: '#fff',
+    fontSize: 28,
     fontWeight: 'bold',
-    textAlign: 'center',
     marginBottom: 30,
+    textAlign: 'center',
+    color: '#2c3e50'
   },
   input: {
-    backgroundColor: '#eee',
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    paddingVertical: 12,
-    fontSize: 16,
-    marginBottom: 20,
+    borderBottomWidth: 1,
+    marginBottom: 15,
+    padding: 10,
+    backgroundColor: '#fff',
+    borderRadius: 8
   },
   button: {
-    backgroundColor: '#573b8a',
+    backgroundColor: '#5e60ce',
     paddingVertical: 15,
-    borderRadius: 8,
-    marginTop: 10,
+    paddingHorizontal: 50,
+    borderRadius: 10,
+    marginVertical: 10,
+    alignItems: 'center'
   },
   buttonText: {
     color: '#fff',
-    fontSize: 17,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontSize: 18
   },
-  linkText: {
-    marginTop: 20,
-    color: '#add8e6',
-    textAlign: 'center',
-    fontSize: 14,
+  registerText: {
+    marginTop: 10,
+    color: '#007bff',
+    textAlign: 'center'
   },
   backText: {
-    marginTop: 10,
-    color: '#ccc',
-    textAlign: 'center',
-    fontSize: 14,
-  },
+    marginTop: 5,
+    color: 'gray',
+    textAlign: 'center'
+  }
 });
