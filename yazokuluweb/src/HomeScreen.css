@@ -1,0 +1,108 @@
+:root {
+  --main-bg: #dbdbdb;
+  --primary: #2d336b;
+  --highlight: #efb036;
+  --text-light: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--main-bg);
+  font-family: "Lato", sans-serif;
+}
+
+.home-container {
+  padding: 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary);
+  color: var(--text-light);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+}
+
+.navbar-links a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: bold;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+  color: var(--highlight);
+}
+
+.welcome {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.welcome h2 {
+  color: var(--primary);
+}
+
+.welcome p {
+  color: #555;
+}
+
+.card-section {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background-color: var(--primary);
+  color: var(--text-light);
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 280px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.card-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--highlight);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.card-btn:hover {
+  background-color: #d29b29;
+}
+
+.history-section {
+  max-width: 700px;
+  margin: auto;
+}
+
+.history-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.history-section th,
+.history-section td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.history-section th {
+  background-color: var(--highlight);
+  color: #222;
+}

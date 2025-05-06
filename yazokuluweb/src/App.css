@@ -45,20 +45,14 @@ form::before {
 }
 
 form::after {
-  background: #BB8493;
+  background: #2D336B;
   z-index: -2;
   transform: translate(-2rem, -2.25rem);
 }
 
-form:focus-within {
-  background: #EFB036;
-}
+/* Form odaklanınca arkaplan değişmesin istersen bu satırı da silebilirsin */
 
-form:focus-within::before {
-  width: 0%;
-  height: 0%;
-  transform: translate(0px, 0px);
-}
+
 
 .field {
   display: flex;
@@ -85,13 +79,17 @@ select {
   background-color: transparent;
   color: white;
   font-size: 16px;
+  outline: none;
 }
 
-input:focus {
-  color: #0e39fe;
-  font-weight: bold;
+/* 👇 Fokus durumunda da stil değişmesin */
+input:focus,
+select:focus {
+  border: 4px solid white;
+  background-color: transparent;
+  color: white;
   outline: none;
-  border: 6px solid s3B1C32;
+  font-weight: normal;
 }
 
 input::placeholder {
@@ -115,19 +113,19 @@ button {
 }
 
 button:hover {
-  border: 6px solid #EFB036;
+  border: 6px solid #AE445A;
 }
 
 p {
   font-size: 0.75rem;
-  color: rgb(58, 43, 145);
+  color: #EFB036;
   line-height: 1.125rem;
   margin: 0.5rem 1.5rem 1.75rem 1.5rem;
 }
 
 .success-message {
   font-size: 1.25rem;
-  color: rgb(58, 43, 145);
+  color: #EFB036;
   text-align: center;
   line-height: 2rem;
   margin: 1.5rem auto 5rem auto;

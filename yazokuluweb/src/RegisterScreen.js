@@ -86,7 +86,7 @@ const RegisterScreen = () => {
 
         <p>
           Zaten hesabın var mı?{" "}
-          <Link to="/login" style={{ fontWeight: "bold" }}>
+          <Link to="/" style={{ fontWeight: "bold" }}>
             Giriş Yap
           </Link>
         </p>
