@@ -325,3 +325,11 @@ C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\obj\Debug\net9.0\refint\Yaz
 C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\obj\Debug\net9.0\YazOkuluAPI.pdb
 C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\obj\Debug\net9.0\YazOkuluAPI.genruntimeconfig.cache
 C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\obj\Debug\net9.0\ref\YazOkuluAPI.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
