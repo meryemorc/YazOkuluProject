@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IFBnwzf8oMw=",
+  "dgSpecHash": "Ag0lEWtbq9U=",
   "success": true,
-  "projectFilePath": "C:\\Users\\msi-nb\\Documents\\GitHub\\yazOkuluSunum\\yaz-okulu-backend\\YazOkuluAPI.csproj",
+  "projectFilePath": "C:\\YazOkuluProject\\yazOkuluBackend\\yaz-okulu-backend\\YazOkuluAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\msi-nb\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\msi-nb\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.4\\microsoft.aspnetcore.openapi.8.0.4.nupkg.sha512",

@@ -17,15 +17,14 @@ public class UsersController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<User>>> GetUsers()
     {
-        return await _context.users.Include(u => u.Department).ToListAsync();
+        return await _context.users.ToListAsync();
     }
 
     // 📌 2. ID'ye Göre Kullanıcı Getir
     [HttpGet("{id}")]
     public async Task<ActionResult<User>> GetUser(int id)
     {
-        var user = await _context.users.Include(u => u.Department)
-                                       .FirstOrDefaultAsync(u => u.Id == id);
+        var user = await _context.users.FindAsync(id);
 
         if (user == null)
         {

@@ -2768,11 +2768,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\msi-nb\\Documents\\GitHub\\yazOkuluSunum\\yaz-okulu-backend\\YazOkuluAPI.csproj",
+      "projectUniqueName": "C:\\YazOkuluProject\\yazOkuluBackend\\yaz-okulu-backend\\YazOkuluAPI.csproj",
       "projectName": "YazOkuluAPI",
-      "projectPath": "C:\\Users\\msi-nb\\Documents\\GitHub\\yazOkuluSunum\\yaz-okulu-backend\\YazOkuluAPI.csproj",
+      "projectPath": "C:\\YazOkuluProject\\yazOkuluBackend\\yaz-okulu-backend\\YazOkuluAPI.csproj",
       "packagesPath": "C:\\Users\\msi-nb\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\msi-nb\\Documents\\GitHub\\yazOkuluSunum\\yaz-okulu-backend\\obj\\",
+      "outputPath": "C:\\YazOkuluProject\\yazOkuluBackend\\yaz-okulu-backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Users\\msi-nb\\OneDrive\\Masaüstü\\Components\\Offline Packages",
