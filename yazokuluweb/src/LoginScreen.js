@@ -1,13 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "./api/axios"; // bu dosyada baseURL ayarlı olmalı
 import "./App.css";
 
+
+
 const LoginScreen = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // formun sayfayı yenilemesini engeller
+    try {
+      const response = await axios.post("api/Auth/login", {
+        email,
+        password,
+      });
+
+      const token = response.data.token;
+      localStorage.setItem("token", token); // token saklanıyor
+      navigate("/home"); // giriş başarılıysa yönlendir
+
+    } catch (err) {
+      console.error(err);
+      setError("Giriş başarısız. Lütfen bilgileri kontrol et.");
+    }
+  };
+
   return (
     <div className="container">
-      <form autoComplete="off" id="loginForm">
+      <form autoComplete="off" id="loginForm" onSubmit={handleSubmit}>
         <h1 id="message">Welcome Back</h1>
-        <small id="smallMessage"></small>
+        {error && <small id="smallMessage" style={{ color: "red" }}>{error}</small>}
 
         <div className="field">
           <input
@@ -16,6 +42,8 @@ const LoginScreen = () => {
             placeholder="Email"
             id="email"
             autoComplete="off"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <label htmlFor="email">Email</label>
         </div>
@@ -27,11 +55,13 @@ const LoginScreen = () => {
             placeholder="Password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <label htmlFor="password">Password</label>
         </div>
 
-        <button id="submit">Log In</button>
+        <button id="submit" type="submit">Log In</button>
 
         <p>
           Don’t have an account?{" "}
