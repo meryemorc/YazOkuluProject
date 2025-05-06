@@ -1,5 +1,5 @@
 :root {
-  --orange: #ff8473;
+  --orange: #BB8493;
 }
 
 body,
@@ -8,7 +8,7 @@ html {
   font-family: "Lato", sans-serif;
   margin: 0;
   padding: 0;
-  background: var(--orange);
+  background: #DBDBDB;
   color: white;
   display: flex;
   justify-content: center;
@@ -22,7 +22,7 @@ html {
 form {
   display: flex;
   flex-direction: column;
-  background: transparent;
+  background: #3E3F5B;
   max-width: 320px;
   padding: 2rem;
   position: relative;
@@ -41,17 +41,17 @@ form::before {
   z-index: -1;
   background: transparent;
   transform: translate(-3.5rem, -3.75rem);
-  border: 6px solid #0e39fe;
+  border: 6px solid #EFB036;
 }
 
 form::after {
-  background: #0ea8ec;
+  background: #BB8493;
   z-index: -2;
   transform: translate(-2rem, -2.25rem);
 }
 
 form:focus-within {
-  background: #0ea8ec;
+  background: #EFB036;
 }
 
 form:focus-within::before {
@@ -91,7 +91,7 @@ input:focus {
   color: #0e39fe;
   font-weight: bold;
   outline: none;
-  border: 6px solid #0e39fe;
+  border: 6px solid s3B1C32;
 }
 
 input::placeholder {
@@ -102,7 +102,7 @@ button {
   border: none;
   padding: 0.85rem 1rem;
   margin-top: 2rem;
-  background-color: #0e39fe;
+  background-color: #EFB036;
   color: white;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -115,7 +115,7 @@ button {
 }
 
 button:hover {
-  border: 6px solid #090c9b;
+  border: 6px solid #EFB036;
 }
 
 p {

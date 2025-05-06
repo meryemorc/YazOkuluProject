@@ -26,7 +26,7 @@ public class User
     [Column("role")]
     public string Role { get; set; } = "student";
 
-    [JsonIgnore]
+    
     [Required]
     [MinLength(8, ErrorMessage = "Şifre en az 8 karakter olmalıdır.")]
     [Column("password_hash")]

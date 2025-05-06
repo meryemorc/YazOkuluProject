@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "./api/axios"; // doğru path olmalı
+import axios from "./api/axios"; 
 
 const RegisterScreen = () => {
   const navigate = useNavigate();
@@ -13,18 +13,22 @@ const RegisterScreen = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/Users", {
+        const response = await axios.post("/api/Users", {
+          fullName,
+          email,
+          password,
+          role
+        });
+      
+            console.log("RESPONSE:", response);
+        alert("Kayıt oldu"); // önce bunu göster
+        navigate("/");  // sonra yönlendir
 
-        fullName,
-        email,
-        password,
-        role
-      });
-      navigate("/login"); 
-    } catch (err) {
-      console.error(err);
-      setError("Kayıt başarısız. Bilgileri kontrol et.");
-    }
+      } catch (err) {
+        console.error("HATA:", err); 
+        setError("Kayıt başarısız. Bilgileri kontrol et.");
+      }
+      
   };
 
   return (
