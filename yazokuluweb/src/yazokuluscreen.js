@@ -78,7 +78,7 @@ const YazOkuluScreen = () => {
         <button
           className="btn btn-light border rounded-circle shadow-sm d-flex align-items-center justify-content-center"
           style={{ width: "40px", height: "40px" }}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/home")}
           title="Ana Sayfaya Dön"
         >
           <i className="bi bi-arrow-left"></i>
