@@ -1,13 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("yatay_gecis_universities")]  
+[Table("yatay_gecis_universities")]
 public class YgUniversity
 {
     [Key]
-    public int id { get; set; }
+    [Column("id")]
+    public int Id { get; set; }
 
     [Required]
     [MaxLength(255)]
-    public string name { get; set; } = string.Empty;
+    [Column("name")]
+    public string Name { get; set; } = string.Empty;
 }
