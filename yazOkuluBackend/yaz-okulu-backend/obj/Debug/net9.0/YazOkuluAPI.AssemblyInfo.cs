@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YazOkuluAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd0be5baed8498f6f15c8fe27dd65ab814511af0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7edb0a567f63518510fc04d8187f14df6c83da64")]
 [assembly: System.Reflection.AssemblyProductAttribute("YazOkuluAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YazOkuluAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
