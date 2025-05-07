@@ -29,6 +29,7 @@ public class YgCourseController : ControllerBase
             return NotFound();
         return course;
     }
+    
 
     // 📌 Bölüme göre ders getir
     [HttpGet("ByDepartment/{departmentId}")]
@@ -38,6 +39,17 @@ public class YgCourseController : ControllerBase
             .Where(c => c.DepartmentId == departmentId)
             .ToListAsync();
     }
+       [HttpGet("SemesterCount/{departmentId}")]
+public async Task<ActionResult<int>> GetSemesterCount(int departmentId)
+{
+    var semesters = await _context.yatay_gecis_courses
+        .Where(c => c.DepartmentId == departmentId)
+        .Select(c => c.Semester)
+        .ToListAsync(); // EF çevirisini burada bitiriyoruz
+
+    int maxSemester = semesters.DefaultIfEmpty(0).Max(); // LINQ işlemi burada yapılıyor
+    return Ok(maxSemester);
+}
 
     // 📌 Yeni ders ekle
     [HttpPost]
