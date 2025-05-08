@@ -1,8 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
+import { getDocument } from "pdfjs-dist";
+import { parseTranscriptLines } from "../utils/pdfParser";
+import { matchCourses } from "../utils/matcher";
+import { GlobalWorkerOptions } from "pdfjs-dist/build/pdf";
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
+
+GlobalWorkerOptions.workerSrc = pdfjsWorker;
+
 
 const YatayGecisScreen = () => {
   const [transcript, setTranscript] = useState(null);
+  const [transcriptLines, setTranscriptLines] = useState([]);
+  const [parsedTranscriptCourses, setParsedTranscriptCourses] = useState([]);
+  const [matchedCourses, setMatchedCourses] = useState([]);
+  const [unmatchedCourses, setUnmatchedCourses] = useState([]);
+
   const [university, setUniversity] = useState("");
   const [faculty, setFaculty] = useState("");
   const [department, setDepartment] = useState("");
@@ -12,19 +25,14 @@ const YatayGecisScreen = () => {
   const [faculties, setFaculties] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [semesters, setSemesters] = useState([]);
+  const [courses, setCourses] = useState([]);
 
-  const [matchedCourses, setMatchedCourses] = useState([]);
-  const [unmatchedCourses, setUnmatchedCourses] = useState([]);
-  const [courses, setCourses] = useState([]); // 🔹 Eklenen ders listesi
-
-  // Üniversiteler
   useEffect(() => {
     axios.get("/api/YgUniversity")
       .then(res => setUniversities(res.data))
       .catch(err => console.error("Üniversiteler alınamadı:", err));
   }, []);
 
-  // Fakülteler
   useEffect(() => {
     if (university) {
       axios.get(`/api/YgFaculty/ByUniversity/${university}`)
@@ -38,7 +46,6 @@ const YatayGecisScreen = () => {
     }
   }, [university]);
 
-  // Bölümler
   useEffect(() => {
     if (faculty) {
       axios.get(`/api/YgDepartment/ByFaculty/${faculty}`)
@@ -50,7 +57,6 @@ const YatayGecisScreen = () => {
     }
   }, [faculty]);
 
-  // Dönemler
   useEffect(() => {
     if (department) {
       axios.get(`/api/YgCourse/SemesterCount/${department}`)
@@ -68,7 +74,6 @@ const YatayGecisScreen = () => {
     }
   }, [department]);
 
-  // Dersleri getir
   useEffect(() => {
     if (department && semester) {
       axios.get(`/api/YgCourse/ByDepartment/${department}`)
@@ -82,9 +87,54 @@ const YatayGecisScreen = () => {
     }
   }, [department, semester]);
 
-  const handleMatchCourses = () => {
-    alert("Eşleştirme başlatıldı! (Backend entegrasyonu yapılacak)");
+  const handlePdfUpload = async (file) => {
+    setTranscript(file);
+    const fileReader = new FileReader();
+  
+    fileReader.onload = async function () {
+      const typedarray = new Uint8Array(this.result);
+      const pdf = await getDocument(typedarray).promise;
+      let allText = "";
+  
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        const strings = content.items.map((item) => item.str);
+        allText += strings.join(" ") + "\n";
+      }
+  
+      const lines = allText
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean);
+  
+      setTranscriptLines(lines);
+      console.log("📄 PDF içeriği:", lines);
+  
+      const parsed = parseTranscriptLines(lines); // 🔹 BURASI KRİTİK
+      setParsedTranscriptCourses(parsed);         // 🔹 BUNU EKLEMEZSEN eşleşme yapılmaz
+  
+      console.log("📄 Transkript dersleri:", parsed);
+    };
+  
+    fileReader.readAsArrayBuffer(file);
   };
+  
+
+  const handleMatchCourses = () => {
+    console.log("🚀 parsedTranscriptCourses:", parsedTranscriptCourses);
+    console.log("🎯 hedef courses:", courses);
+  
+    if (!parsedTranscriptCourses || parsedTranscriptCourses.length === 0 || !courses || courses.length === 0){
+      alert("Dersler veya transkript eksik.");
+      return;
+    }
+  
+    const { matched, unmatched } = matchCourses(parsedTranscriptCourses, courses);
+    setMatchedCourses(matched);
+    setUnmatchedCourses(unmatched);
+  };
+  
 
   return (
     <div className="min-h-screen bg-gray-900 text-white px-6 py-10">
@@ -198,42 +248,43 @@ const YatayGecisScreen = () => {
         <div className="mb-12">
   <h3 className="text-xl font-semibold mb-4">📄 Transkript Dosyası Yükle</h3>
   <div className="flex items-center justify-center w-full">
-    <label
-      htmlFor="dropzone-file"
-      className="flex flex-col items-center justify-center w-full h-52 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer bg-gray-800 hover:bg-gray-700 transition"
-    >
-      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-        <svg
-          className="w-8 h-8 mb-4 text-gray-400"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 20 16"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5A5.5 5.5 0 0 0 5.2 5.02C5.14 5.02 5.07 5 5 5a4 4 0 0 0 0 8h2.2M10 15V6m0 0L8 8m2-2 2 2"
-          />
-        </svg>
-        <p className="mb-2 text-sm text-gray-400">
-          <span className="font-semibold">Tıklayın ya da sürükleyip bırakın</span>
-        </p>
-        <p className="text-xs text-gray-400">
-          PDF veya JPG/PNG dosyaları (Max: 2MB)
-        </p>
-      </div>
-      <input
-        id="dropzone-file"
-        type="file"
-        className="hidden"
-        accept=".pdf,.jpg,.jpeg,.png"
-        onChange={(e) => setTranscript(e.target.files[0])}
-      />
-    </label>
-  </div>
+  <label
+    htmlFor="dropzone-file"
+    className="flex flex-col items-center justify-center w-full h-52 border-2 border-dashed border-gray-500 rounded-lg cursor-pointer bg-gray-800 hover:bg-gray-700 transition"
+  >
+    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+      <svg
+        className="w-8 h-8 mb-4 text-gray-400"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 20 16"
+      >
+        <path
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5A5.5 5.5 0 0 0 5.2 5.02C5.14 5.02 5.07 5 5 5a4 4 0 0 0 0 8h2.2M10 15V6m0 0L8 8m2-2 2 2"
+        />
+      </svg>
+      <p className="mb-2 text-sm text-gray-400">
+        <span className="font-semibold">PDF dosyasını yükleyin</span>
+      </p>
+      <p className="text-xs text-gray-400">Sadece PDF (Max: 2MB)</p>
+    </div>
+
+    {/* ✅ Tek ve temiz input alanı */}
+    <input
+      id="dropzone-file"
+      type="file"
+      accept="application/pdf"
+      className="hidden"
+      onChange={(e) => handlePdfUpload(e.target.files[0])}
+    />
+  </label>
+</div>
+
 
   {/* Dosya adı gösterme */}
   {transcript && (
@@ -252,7 +303,8 @@ const YatayGecisScreen = () => {
             ) : (
               <ul className="list-disc ml-4 space-y-1">
                 {matchedCourses.map((c, i) => (
-                  <li key={i}>{c.course_code} - {c.course_name}</li>
+                  <li key={i}>{c.courseCode} - {c.courseName}</li>
+
                 ))}
               </ul>
             )}
@@ -265,7 +317,8 @@ const YatayGecisScreen = () => {
             ) : (
               <ul className="list-disc ml-4 space-y-1">
                 {unmatchedCourses.map((c, i) => (
-                  <li key={i}>{c.course_code} - {c.course_name}</li>
+                  <li key={i}>{c.courseCode} - {c.courseName}</li>
+
                 ))}
               </ul>
             )}
