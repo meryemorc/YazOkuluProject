@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./YazOkuluScreen.css";
-import axios from "./api/axios";
+import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
 const YazOkuluScreen = () => {

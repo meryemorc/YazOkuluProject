@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "./api/axios";
-import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "../api/axios";
+
 import "./YatayGecisScreen.css";
+
 
 const YatayGecisScreen = () => {
   const [transcript, setTranscript] = useState(null);
@@ -82,10 +83,7 @@ const YatayGecisScreen = () => {
       <div className="yatay-card">
         <h2 className="text-center mb-5">Yatay Geçiş Başvurusu</h2>
 
-        <div className="mb-4">
-          <label className="form-label fw-semibold">📄 Transkript Yükle</label>
-          <input type="file" className="form-control" onChange={handleFileChange} />
-        </div>
+       
 
         <div className="row g-3 mb-4">
           <div className="col-md-3 col-6">
