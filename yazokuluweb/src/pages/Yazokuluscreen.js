@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./YazOkuluScreen.css";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -21,6 +20,28 @@ const YazOkuluScreen = () => {
   }, []);
 
   useEffect(() => {
+    if (selectedUniversity) {
+      axios.get("/api/Faculties").then((res) => {
+        const filtered = res.data.filter(
+          (f) => f.university_id === parseInt(selectedUniversity)
+        );
+        setFaculties(filtered);
+      });
+    }
+  }, [selectedUniversity]);
+
+  useEffect(() => {
+    if (selectedFaculty) {
+      axios.get("/api/Department").then((res) => {
+        const filtered = res.data.filter(
+          (d) => d.faculty_id === parseInt(selectedFaculty)
+        );
+        setDepartments(filtered);
+      });
+    }
+  }, [selectedFaculty]);
+
+  useEffect(() => {
     if (selectedDepartment) {
       axios.get("/api/Course").then((res) => {
         const filtered = res.data.filter(
@@ -31,189 +52,116 @@ const YazOkuluScreen = () => {
     }
   }, [selectedDepartment]);
 
-  useEffect(() => {
-    if (selectedFaculty) {
-      axios.get("/api/Department").then((res) => {
-        const filtered = res.data.filter(
-          (dep) => dep.faculty_id === parseInt(selectedFaculty)
-        );
-        setDepartments(filtered);
-      });
-    }
-  }, [selectedFaculty]);
-
-  useEffect(() => {
-    if (selectedUniversity) {
-      axios.get("/api/Faculties").then((res) => {
-        const filtered = res.data.filter(
-          (fac) => fac.university_id === parseInt(selectedUniversity)
-        );
-        setFaculties(filtered);
-      });
-    }
-  }, [selectedUniversity]);
-
   const handleSearch = () => {
     if (!searchTerm.trim()) return;
-    axios.get("/api/Course")
-      .then((res) => {
-        const term = searchTerm.toLowerCase();
-        const matched = res.data.filter((course) =>
-          course.course_name.toLowerCase().includes(term) ||
-          course.course_code.toLowerCase().includes(term)
-        );
-        setCourses(matched);
-      })
-      .catch((err) => console.error("Arama hatası:", err));
+    axios.get("/api/Course").then((res) => {
+      const term = searchTerm.toLowerCase();
+      const matched = res.data.filter((c) =>
+        c.course_name.toLowerCase().includes(term) ||
+        c.course_code.toLowerCase().includes(term)
+      );
+      setCourses(matched);
+    });
   };
 
   return (
-    <div className="position-relative">
-      {/* Sol üst köşedeki geri dön butonu */}
-      <div
-        className="position-absolute top-0 start-0 m-3"
-        style={{ zIndex: 1000 }}
-      >
-        <button
-          className="btn btn-light border rounded-circle shadow-sm d-flex align-items-center justify-content-center"
-          style={{ width: "40px", height: "40px" }}
-          onClick={() => navigate("/home")}
-          title="Ana Sayfaya Dön"
-        >
-          <i className="bi bi-arrow-left"></i>
-        </button>
-      </div>
+    <div className="min-h-screen bg-gray-900 text-white px-6 py-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold mb-2">🎓 Yaz Okulu Başvurusu</h1>
+          <p className="text-gray-400">Filtreleri kullanarak ders arayabilir veya üniversite seçimi yapabilirsiniz.</p>
+        </div>
 
-      {/* Sayfanın ana içeriği */}
-      <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
-        <div className="card shadow-lg p-5 w-100" style={{ maxWidth: "960px" }}>
-          <div className="text-center mb-4">
-            <h1 className="text-primary fw-bold">
-              <i className="bi bi-journal-bookmark-fill me-2"></i>Yaz Okulu Başvurusu
-            </h1>
-            <p className="text-muted">
-              Üniversite, fakülte ve bölüm seçerek dersleri görüntüleyebilir veya doğrudan ders adıyla arama yapabilirsiniz.
-            </p>
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <div>
+            <label className="block mb-2 text-sm font-medium">Üniversite</label>
+            <select
+              className="w-full p-2 bg-gray-800 text-white rounded"
+              value={selectedUniversity}
+              onChange={(e) => setSelectedUniversity(e.target.value)}
+            >
+              <option value="">Seçiniz</option>
+              {universities.map((u) => (
+                <option key={u.id} value={u.id}>{u.name}</option>
+              ))}
+            </select>
           </div>
 
-          <div className="row g-4 mb-4 justify-content-center">
-            <div className="col-md-4">
-              <label className="form-label">🎓 Üniversite Seçin</label>
-              <select
-                className="form-select"
-                onChange={(e) => setSelectedUniversity(e.target.value)}
-                value={selectedUniversity}
-              >
-                <option value="">-- Üniversite Seçin --</option>
-                {universities.map((uni) => (
-                  <option key={uni.id} value={uni.id}>
-                    {uni.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="col-md-4">
-              <label className="form-label">🏛️ Fakülte Seçin</label>
-              <select
-                className="form-select"
-                onChange={(e) => setSelectedFaculty(e.target.value)}
-                value={selectedFaculty}
-              >
-                <option value="">-- Fakülte Seçin --</option>
-                {faculties.map((fac) => (
-                  <option key={fac.id} value={fac.id}>
-                    {fac.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="col-md-4">
-              <label className="form-label">🏫 Bölüm Seçin</label>
-              <select
-                className="form-select"
-                onChange={(e) => setSelectedDepartment(e.target.value)}
-                value={selectedDepartment}
-              >
-                <option value="">-- Bölüm Seçin --</option>
-                {departments.map((dep) => (
-                  <option key={dep.id} value={dep.id}>
-                    {dep.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <div>
+            <label className="block mb-2 text-sm font-medium">Fakülte</label>
+            <select
+              className="w-full p-2 bg-gray-800 text-white rounded"
+              value={selectedFaculty}
+              onChange={(e) => setSelectedFaculty(e.target.value)}
+            >
+              <option value="">Seçiniz</option>
+              {faculties.map((f) => (
+                <option key={f.id} value={f.id}>{f.name}</option>
+              ))}
+            </select>
           </div>
 
-          {/* Arama kutusu */}
-          <div className="text-center mb-5">
-            <h5 className="mb-3">
-              <i className="bi bi-search me-2"></i>Ders Ara
-            </h5>
-            <div className="d-flex justify-content-center">
-              <div style={{ maxWidth: "600px", width: "100%" }}>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Ders adı veya kodu girin..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") handleSearch();
-                  }}
-                />
-                <div className="d-flex justify-content-end mt-2">
-                  <button
-                    className="btn btn-primary"
-                    onClick={handleSearch}
-                  >
-                    <i className="bi bi-search me-1"></i> Ara
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div>
+            <label className="block mb-2 text-sm font-medium">Bölüm</label>
+            <select
+              className="w-full p-2 bg-gray-800 text-white rounded"
+              value={selectedDepartment}
+              onChange={(e) => setSelectedDepartment(e.target.value)}
+            >
+              <option value="">Seçiniz</option>
+              {departments.map((d) => (
+                <option key={d.id} value={d.id}>{d.name}</option>
+              ))}
+            </select>
           </div>
+        </div>
 
-          {/* Ders tablosu */}
-          <h4 className="fw-semibold mb-3">
-            <i className="bi bi-journal-text me-2 text-primary"></i>Mevcut Dersler
-          </h4>
-          <div className="table-responsive">
-            <table className="table table-bordered table-hover align-middle text-center">
-              <thead className="table-primary">
+        <div className="mb-6">
+          <input
+            type="text"
+            placeholder="Ders adı ya da kodu..."
+            className="w-full md:w-1/2 p-2 bg-gray-800 text-white rounded"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          />
+          <button
+            onClick={handleSearch}
+            className="ml-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded"
+          >
+            Ara
+          </button>
+        </div>
+
+        <div className="overflow-x-auto bg-gray-800 rounded shadow">
+          <table className="w-full table-auto text-sm text-left">
+            <thead className="bg-gray-700 text-white">
+              <tr>
+                <th className="px-4 py-2">Kod</th>
+                <th className="px-4 py-2">Ders Adı</th>
+                <th className="px-4 py-2">Kredi</th>
+                <th className="px-4 py-2">AKTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {courses.length === 0 ? (
                 <tr>
-                  <th>Kod</th>
-                  <th>Ders Adı</th>
-                  <th>Kredi</th>
-                  <th>AKTS</th>
+                  <td colSpan="4" className="px-4 py-2 text-center text-gray-400">
+                    Gösterilecek ders yok.
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {courses.map((course) => (
-                  <tr key={course.id}>
-                    <td>{course.course_code}</td>
-                    <td>{course.course_name}</td>
-                    <td>{course.kredi}</td>
-                    <td>{course.akts}</td>
+              ) : (
+                courses.map((c) => (
+                  <tr key={c.id} className="border-t border-gray-700">
+                    <td className="px-4 py-2">{c.course_code}</td>
+                    <td className="px-4 py-2">{c.course_name}</td>
+                    <td className="px-4 py-2">{c.kredi}</td>
+                    <td className="px-4 py-2">{c.akts}</td>
                   </tr>
-                ))}
-                {courses.length === 0 && (
-                  <tr>
-                    <td colSpan="4" className="text-muted text-center">
-                      Gösterilecek ders bulunamadı.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-
-            <div className="text-center">
-              <p className="text-muted">
-                Toplam {courses.length} ders gösteriliyor.
-              </p>
-            </div>
-          </div>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
