@@ -39,6 +39,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<TranscriptParserService>();
+builder.Services.AddScoped<CourseMatcherService>();
+
 
 var app = builder.Build();
 
