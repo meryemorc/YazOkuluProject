@@ -78,19 +78,34 @@ const YatayGecisScreen = () => {
   }, [department, semester]);
 
   const handleFileUpload = async () => {
-    const formData = new FormData();
-    formData.append("file", transcript);
-    formData.append("departmentId", department);
+  if (!transcript || !department || !semester) {
+    alert("Lütfen PDF, bölüm ve dönem seçiniz.");
+    return;
+  }
 
-    try {
-      const response = await axios.post("/api/YgCourse/upload-transcript", formData);
-      const { matched, unmatched } = response.data;
-      setMatchedCourses(matched);
-      setUnmatchedCourses(unmatched);
-    } catch (err) {
-      console.error("Yükleme hatası:", err);
-    }
-  };
+  const formData = new FormData();
+  formData.append("file", transcript);
+
+  try {
+    const response = await axios.post(
+      `/Transcript/upload?departmentId=${department}&semester=${semester}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    const { matched, unmatched } = response.data;
+    setMatchedCourses(matched);
+    setUnmatchedCourses(unmatched);
+  } catch (err) {
+    console.error("Yükleme hatası:", err);
+    alert("Bir hata oluştu.");
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-900 text-white px-6 py-10">

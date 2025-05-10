@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using yaz_okulu_backend.Models;
 using yaz_okulu_backend.Models.DTOs;
+using FuzzySharp;
+
 
 
 
@@ -15,9 +17,12 @@ public class CourseMatcherService
 
         foreach (var target in targetCourses)
         {
-            var match = transcriptCourses.FirstOrDefault(t =>
-                t.CourseCode.Equals(target.CourseCode, System.StringComparison.OrdinalIgnoreCase) ||
-                t.CourseName.ToLower().Contains(target.CourseName.ToLower())
+            var match = transcriptCourses.FirstOrDefault(tc =>
+                tc.CourseCode.Equals(target.CourseCode, StringComparison.OrdinalIgnoreCase) || (
+                    Math.Abs(tc.Kredi - target.Kredi) <= 1 &&
+                    Math.Abs(tc.Akts - target.Akts) <= 1 &&
+                    Fuzz.PartialRatio(tc.CourseName.ToLower(), target.CourseName.ToLower()) >= 70
+                )
             );
 
             if (match != null)
