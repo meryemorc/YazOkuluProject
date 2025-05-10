@@ -338,3 +338,4 @@ C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\UglyToad.P
 C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\UglyToad.PdfPig.Fonts.dll
 C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\UglyToad.PdfPig.Tokenization.dll
 C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\UglyToad.PdfPig.Tokens.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\FuzzySharp.dll

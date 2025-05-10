@@ -7,7 +7,6 @@ using yaz_okulu_backend.Models;
 using yaz_okulu_backend.Models.DTOs;
 
 
-
 namespace yaz_okulu_backend.Services
 {
     public interface ITranscriptService
@@ -18,10 +17,12 @@ namespace yaz_okulu_backend.Services
     public class TranscriptService : ITranscriptService
     {
         private readonly ApplicationDbContext _context;
+        private readonly CourseMatcherService _matcher;
 
-        public TranscriptService(ApplicationDbContext context)
+        public TranscriptService(ApplicationDbContext context, CourseMatcherService matcher)
         {
             _context = context;
+            _matcher = matcher;
         }
 
         public async Task<MatchResultDto> ProcessTranscript(Stream pdfStream, int departmentId, int semester)
@@ -38,51 +39,34 @@ namespace yaz_okulu_backend.Services
                 .ToList();
 
             // 4. Eşleştirme yap
-            var matched = new List<YgCourse>();
-            var unmatched = new List<YgCourse>();
+            var result = _matcher.Match(parsedCourses, targetCourses);
 
-            foreach (var target in targetCourses)
-            {
-                bool found = parsedCourses.Any(tc =>
-                    tc.CourseCode.ToLower() == target.CourseCode.ToLower() ||
-                    tc.CourseName.ToLower().Contains(target.CourseName.ToLower()));
-
-                if (found)
-                    matched.Add(target);
-                else
-                    unmatched.Add(target);
-            }
-
-            return new MatchResultDto
-            {
-                Matched = matched,
-                Unmatched = unmatched
-            };
+            return result;
         }
 
         private List<string> ExtractLinesFromPdf(Stream pdfStream)
-{
-    var lines = new List<string>();
-
-    using (var pdf = PdfDocument.Open(pdfStream))
-    {
-        foreach (var page in pdf.GetPages())
         {
-            string[] pageLines = page.Text.Split('\n', '\r');
-            foreach (var line in pageLines)
+            var lines = new List<string>();
+
+            using (var pdf = PdfDocument.Open(pdfStream))
             {
-                if (!string.IsNullOrWhiteSpace(line))
+                foreach (var page in pdf.GetPages())
                 {
-                    var trimmed = line.Trim();
-                    Console.WriteLine("📄 Satır: " + trimmed); // 🔍 Log satırı
-                    lines.Add(trimmed);
+                    string[] pageLines = page.Text.Split('\n', '\r');
+                    foreach (var line in pageLines)
+                    {
+                        if (!string.IsNullOrWhiteSpace(line))
+                        {
+                            var trimmed = line.Trim();
+                            Console.WriteLine("📄 Satır: " + trimmed); // 🔍 Log satırı
+                            lines.Add(trimmed);
+                        }
+                    }
                 }
             }
-        }
-    }
 
-    return lines;
-}
+            return lines;
+        }
 
         private List<TranscriptCourseDto> ParseTranscriptLines(List<string> lines)
         {

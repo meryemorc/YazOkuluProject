@@ -1,40 +1,39 @@
 using System.Collections.Generic;
 using System.Linq;
+using FuzzySharp;
 using yaz_okulu_backend.Models;
 using yaz_okulu_backend.Models.DTOs;
-using FuzzySharp;
 
-
-
-
-
-public class CourseMatcherService
+namespace yaz_okulu_backend.Services
 {
-    public MatchResultDto Match(List<TranscriptCourseDto> transcriptCourses, List<YgCourse> targetCourses)
+    public class CourseMatcherService
     {
-        var matched = new List<YgCourse>();
-        var unmatched = new List<YgCourse>();
-
-        foreach (var target in targetCourses)
+        public MatchResultDto Match(List<TranscriptCourseDto> transcriptCourses, List<YgCourse> targetCourses)
         {
-            var match = transcriptCourses.FirstOrDefault(tc =>
-                tc.CourseCode.Equals(target.CourseCode, StringComparison.OrdinalIgnoreCase) || (
-                    Math.Abs(tc.Kredi - target.Kredi) <= 1 &&
-                    Math.Abs(tc.Akts - target.Akts) <= 1 &&
-                    Fuzz.PartialRatio(tc.CourseName.ToLower(), target.CourseName.ToLower()) >= 70
-                )
-            );
+            var matched = new List<YgCourse>();
+            var unmatched = new List<YgCourse>();
 
-            if (match != null)
-                matched.Add(target);
-            else
-                unmatched.Add(target);
+            foreach (var target in targetCourses)
+            {
+                var match = transcriptCourses.FirstOrDefault(transcript =>
+                    transcript.CourseCode.Equals(target.CourseCode, System.StringComparison.OrdinalIgnoreCase) || (
+                        Math.Abs(transcript.Kredi - target.Kredi) <= 1 &&
+                        Math.Abs(transcript.Akts - target.Akts) <= 1 &&
+                        Fuzz.Ratio(transcript.CourseName.ToLower(), target.CourseName.ToLower()) >= 70
+                    )
+                );
+
+                if (match != null)
+                    matched.Add(target);
+                else
+                    unmatched.Add(target);
+            }
+
+            return new MatchResultDto
+            {
+                Matched = matched,
+                Unmatched = unmatched
+            };
         }
-
-        return new MatchResultDto
-        {
-            Matched = matched,
-            Unmatched = unmatched
-        };
     }
 }

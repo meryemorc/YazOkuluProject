@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // 🔌 Veritabanı bağlantısı (PostgreSQL)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    
 
 // 🌐 CORS ayarı (React frontend localhost:3000 için)
 builder.Services.AddCors(options =>
@@ -38,6 +39,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 // 📦 Controller ve Swagger hizmetleri
 builder.Services.AddControllers();
+builder.Services.AddScoped<CourseMatcherService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<TranscriptParserService>();
