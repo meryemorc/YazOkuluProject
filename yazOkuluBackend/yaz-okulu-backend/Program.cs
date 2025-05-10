@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using yaz_okulu_backend.Models;
+using yaz_okulu_backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +42,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<TranscriptParserService>();
 builder.Services.AddScoped<CourseMatcherService>();
+builder.Services.AddScoped<ITranscriptService, TranscriptService>();
+
+
 
 
 var app = builder.Build();

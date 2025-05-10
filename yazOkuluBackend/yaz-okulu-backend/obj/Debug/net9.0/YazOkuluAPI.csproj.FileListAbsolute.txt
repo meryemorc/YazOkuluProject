@@ -333,3 +333,8 @@ C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\Microsoft.
 C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
 C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\UglyToad.PdfPig.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\UglyToad.PdfPig.Core.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\UglyToad.PdfPig.Fonts.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\UglyToad.PdfPig.Tokenization.dll
+C:\YazOkuluProject\yazOkuluBackend\yaz-okulu-backend\bin\Debug\net9.0\UglyToad.PdfPig.Tokens.dll

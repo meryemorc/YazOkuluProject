@@ -1,7 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using yazOkulu_backend.Models.DTOs;
+using yaz_okulu_backend.Models;
+using yaz_okulu_backend.Models.DTOs;
+
+
+
 
 public class TranscriptParserService
 {

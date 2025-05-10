@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using UglyToad.PdfPig;
 using yaz_okulu_backend.Models;
 using yaz_okulu_backend.Models.DTOs;
-using yaz_okulu_backend.Models.Context;
+
+
 
 namespace yaz_okulu_backend.Services
 {
@@ -32,7 +33,7 @@ namespace yaz_okulu_backend.Services
             var parsedCourses = ParseTranscriptLines(lines);
 
             // 3. Veritabanından hedef dersleri al (seçilen bölüm ve sınıfa kadar)
-            var targetCourses = _context.YgCourses
+            var targetCourses = _context.yatay_gecis_courses
                 .Where(c => c.DepartmentId == departmentId && c.Semester <= semester)
                 .ToList();
 
@@ -60,24 +61,28 @@ namespace yaz_okulu_backend.Services
         }
 
         private List<string> ExtractLinesFromPdf(Stream pdfStream)
-        {
-            var lines = new List<string>();
+{
+    var lines = new List<string>();
 
-            using (var pdf = PdfDocument.Open(pdfStream))
+    using (var pdf = PdfDocument.Open(pdfStream))
+    {
+        foreach (var page in pdf.GetPages())
+        {
+            string[] pageLines = page.Text.Split('\n', '\r');
+            foreach (var line in pageLines)
             {
-                foreach (var page in pdf.GetPages())
+                if (!string.IsNullOrWhiteSpace(line))
                 {
-                    string[] pageLines = page.Text.Split('\n', '\r');
-                    foreach (var line in pageLines)
-                    {
-                        if (!string.IsNullOrWhiteSpace(line))
-                            lines.Add(line.Trim());
-                    }
+                    var trimmed = line.Trim();
+                    Console.WriteLine("📄 Satır: " + trimmed); // 🔍 Log satırı
+                    lines.Add(trimmed);
                 }
             }
-
-            return lines;
         }
+    }
+
+    return lines;
+}
 
         private List<TranscriptCourseDto> ParseTranscriptLines(List<string> lines)
         {
