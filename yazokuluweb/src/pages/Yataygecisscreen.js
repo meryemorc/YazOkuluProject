@@ -235,19 +235,27 @@ const YatayGecisScreen = () => {
         </div>
 
         {/* Başlat Butonu */}
-        <div className="text-center mb-10">
-          <button
-            onClick={handleFileUpload}
-            disabled={loading}
-            className={`px-6 py-2 font-semibold rounded transition ${
-              loading
-                ? "bg-gray-500 cursor-not-allowed"
-                : "bg-yellow-500 hover:bg-yellow-600 text-black"
-            }`}
-          >
-            {loading ? "Eşleştiriliyor..." : "🔍 Eşleştirmeyi Başlat"}
-          </button>
-        </div>
+        <div className="flex justify-center gap-4 mb-10">
+  <button
+    onClick={handleFileUpload}
+    disabled={loading}
+    className={`px-6 py-2 font-semibold rounded transition ${
+      loading
+        ? "bg-gray-500 cursor-not-allowed"
+        : "bg-yellow-500 hover:bg-yellow-600 text-black"
+    }`}
+  >
+    {loading ? "Eşleştiriliyor..." : "🔍 Manuel Eşleştirme"}
+  </button>
+
+  <button
+    onClick={() => alert("Bu özellik yakında aktif olacak 🤖")}
+    className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded transition"
+  >
+    🤖 SummerSchoolAsistanla Eşleştir
+  </button>
+</div>
+
 
         {/* Sonuç Kartları */}
         {[{

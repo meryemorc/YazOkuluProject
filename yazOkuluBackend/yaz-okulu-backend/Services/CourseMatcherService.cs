@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FuzzySharp;
@@ -15,22 +16,21 @@ namespace yaz_okulu_backend.Services
 
         foreach (var target in targetCourses)
         {
-           var match = transcriptCourses.FirstOrDefault(transcript =>
-{
-    var code1 = transcript.CourseCode?.Trim().ToUpperInvariant();
-    var code2 = target.CourseCode?.Trim().ToUpperInvariant();
+            var match = transcriptCourses.FirstOrDefault(transcript =>
+            {
+                // 1. Kod birebir eşleşiyorsa => Denk
+                if (IsCourseCodeMatch(transcript.CourseCode, target.CourseCode))
+                    return true;
 
-    // Kodlar birebir aynıysa direkt eşle
-    if (!string.IsNullOrEmpty(code1) && !string.IsNullOrEmpty(code2) && code1 == code2)
-        return true;
+                // 2. Kod eşleşmiyorsa => Ad benzerliğine bak (daha katı eşik)
+                int similarity = Fuzz.TokenSetRatio(
+                    NormalizeName(transcript.CourseName),
+                    NormalizeName(target.CourseName));
 
-    // Diğer kontroller (isim, kredi, AKTS)
-    int similarity = Fuzz.TokenSetRatio(transcript.CourseName.ToLower(), target.CourseName.ToLower());
-    bool krediUyumlu = Math.Abs(transcript.Kredi - target.Kredi) <= 1;
-    bool aktsUyumlu = Math.Abs(transcript.Akts - target.Akts) <= 1;
+                Console.WriteLine($"🔍 Ad benzerliği: \"{transcript.CourseName}\" vs \"{target.CourseName}\" = {similarity}");
 
-    return similarity >= 70 && krediUyumlu && aktsUyumlu;
-});
+                return similarity >= 70; // ad benzerliği sadece kod tutmazsa devreye giriyor
+            });
 
             if (match != null)
                 matched.Add(target);
@@ -47,12 +47,26 @@ namespace yaz_okulu_backend.Services
 
     private bool IsCourseCodeMatch(string code1, string code2)
     {
-        return !string.IsNullOrWhiteSpace(code1) &&
-               !string.IsNullOrWhiteSpace(code2) &&
-               code1.Trim().ToUpperInvariant() == code2.Trim().ToUpperInvariant();
+        return NormalizeCode(code1) == NormalizeCode(code2);
+    }
+
+    private string NormalizeCode(string code)
+    {
+        if (string.IsNullOrWhiteSpace(code)) return "";
+        return new string(code.Where(char.IsLetterOrDigit).ToArray()).ToUpperInvariant();
+    }
+
+    private string NormalizeName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return "";
+        return name
+            .ToLowerInvariant()
+            .Replace("-", " ")
+            .Replace(".", "")
+            .Replace("–", " ")
+            .Replace("ı", "i")  // Türkçe küçük "ı" yerine "i"
+            .Replace("İ", "i")  // Türkçe büyük "İ" yerine "i"
+            .Trim();
     }
 }
-
-
-    }
-
+}
