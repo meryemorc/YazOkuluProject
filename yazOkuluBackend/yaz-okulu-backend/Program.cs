@@ -45,6 +45,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<TranscriptParserService>();
 builder.Services.AddScoped<CourseMatcherService>();
 builder.Services.AddScoped<ITranscriptService, TranscriptService>();
+builder.Services.AddScoped<YgCourseService>();
+
 
 
 

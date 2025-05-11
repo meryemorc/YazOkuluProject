@@ -1,11 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UglyToad.PdfPig;
-using yaz_okulu_backend.Models;
 using yaz_okulu_backend.Models.DTOs;
-
 
 namespace yaz_okulu_backend.Services
 {
@@ -16,79 +15,90 @@ namespace yaz_okulu_backend.Services
 
     public class TranscriptService : ITranscriptService
     {
-        private readonly ApplicationDbContext _context;
-        private readonly CourseMatcherService _matcher;
+        private readonly TranscriptParserService _parserService;
+        private readonly YgCourseService _ygCourseService;
+        private readonly CourseMatcherService _matcherService;
 
-        public TranscriptService(ApplicationDbContext context, CourseMatcherService matcher)
+        public TranscriptService(
+            TranscriptParserService parserService,
+            YgCourseService ygCourseService,
+            CourseMatcherService matcherService)
         {
-            _context = context;
-            _matcher = matcher;
+            _parserService = parserService;
+            _ygCourseService = ygCourseService;
+            _matcherService = matcherService;
         }
 
-        public async Task<MatchResultDto> ProcessTranscript(Stream pdfStream, int departmentId, int semester)
+        public async Task<MatchResultDto> ProcessTranscript(Stream fileStream, int departmentId, int semester)
         {
-            // 1. PDF'ten satırları oku
-            var lines = ExtractLinesFromPdf(pdfStream);
+            Console.WriteLine("📥 Transkript işleme başladı...");
 
-            // 2. Satırlardan transkript derslerini ayrıştır
-            var parsedCourses = ParseTranscriptLines(lines);
+            // PDF'ten satırları al
+            var lines = ExtractLinesFromPdf(fileStream);
 
-            // 3. Veritabanından hedef dersleri al (seçilen bölüm ve sınıfa kadar)
-            var targetCourses = _context.yatay_gecis_courses
-                .Where(c => c.DepartmentId == departmentId && c.Semester <= semester)
-                .ToList();
-
-            // 4. Eşleştirme yap
-            var result = _matcher.Match(parsedCourses, targetCourses);
-
-            return result;
-        }
-
-        private List<string> ExtractLinesFromPdf(Stream pdfStream)
-        {
-            var lines = new List<string>();
-
-            using (var pdf = PdfDocument.Open(pdfStream))
-            {
-                foreach (var page in pdf.GetPages())
-                {
-                    string[] pageLines = page.Text.Split('\n', '\r');
-                    foreach (var line in pageLines)
-                    {
-                        if (!string.IsNullOrWhiteSpace(line))
-                        {
-                            var trimmed = line.Trim();
-                            Console.WriteLine("📄 Satır: " + trimmed); // 🔍 Log satırı
-                            lines.Add(trimmed);
-                        }
-                    }
-                }
-            }
-
-            return lines;
-        }
-
-        private List<TranscriptCourseDto> ParseTranscriptLines(List<string> lines)
-        {
-            var result = new List<TranscriptCourseDto>();
-            var regex = new System.Text.RegularExpressions.Regex(@"^([A-Z]{2,}\d{3,})\s+(.+?)\s+(\d+)\s+(\d+)\s+\d+(?:[.,]\d+)?\s+[A-Z]{2}$");
-
+            Console.WriteLine("📄 PDF'ten okunan toplam satır: " + lines.Count);
             foreach (var line in lines)
-            {
-                var match = regex.Match(line);
-                if (match.Success)
-                {
-                    result.Add(new TranscriptCourseDto
-                    {
-                        CourseCode = match.Groups[1].Value.Trim(),
-                        CourseName = match.Groups[2].Value.Trim(),
-                        Kredi = int.Parse(match.Groups[3].Value),
-                        Akts = int.Parse(match.Groups[4].Value)
-                    });
-                }
-            }
+                Console.WriteLine("🧾 SATIR: " + line);
+
+            // Satırları parser'a gönder
+            var parsedCourses = _parserService.Parse(lines);
+            Console.WriteLine($"📚 Parse edilen ders sayısı: {parsedCourses.Count}");
+
+            // Veritabanındaki hedef dersleri çek
+            var targetCourses = await _ygCourseService.GetByDepartmentAndSemester(departmentId, semester);
+            Console.WriteLine($"🎯 Veritabanından alınan hedef ders sayısı: {targetCourses.Count}");
+
+            // Eşleştir
+            var result = _matcherService.Match(parsedCourses, targetCourses);
+            Console.WriteLine($"🔗 Eşleşen: {result.Matched.Count}, Eşleşmeyen: {result.Unmatched.Count}");
 
             return result;
         }
+
+        // 🔍 PDF'ten satırları çıkaran fonksiyon
+        private List<string> ExtractLinesFromPdf(Stream pdfStream)
+{
+    var lines = new List<string>();
+
+    using (var document = PdfDocument.Open(pdfStream))
+    {
+        foreach (var page in document.GetPages())
+        {
+            var currentLine = "";
+
+            foreach (var word in page.GetWords())
+            {
+                var text = word.Text.Trim();
+
+                if (text.EndsWith("-")) // satır sonu olabilir
+                {
+                    currentLine += text.Substring(0, text.Length - 1);
+                    lines.Add(currentLine.Trim());
+                    currentLine = "";
+                }
+                else if (text.Contains("\n") || text.Contains("\r"))
+                {
+                    currentLine += " " + text;
+                    lines.Add(currentLine.Trim());
+                    currentLine = "";
+                }
+                else
+                {
+                    currentLine += " " + text;
+                }
+            }
+
+            // Satır tamamlandıysa ekle
+            if (!string.IsNullOrWhiteSpace(currentLine))
+            {
+                lines.Add(currentLine.Trim());
+            }
+        }
+    }
+
+    Console.WriteLine("📄 PDF'ten okunan toplam satır: " + lines.Count);
+    return lines;
+}
+
     }
 }

@@ -23,6 +23,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<YgFaculty> yatay_gecis_faculties { get; set; }
 
     public DbSet<YgUniversity> yatay_gecis_universities { get; set; }
+    public DbSet<YgCourse> YgCourses { get; set; }
+
 
 
 

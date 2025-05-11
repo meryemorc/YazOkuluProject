@@ -17,6 +17,8 @@ const YatayGecisScreen = () => {
   const [semesters, setSemesters] = useState([]);
   const [courses, setCourses] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     axios.get("/api/YgUniversity")
       .then(res => setUniversities(res.data))
@@ -79,32 +81,49 @@ const YatayGecisScreen = () => {
 
   const handleFileUpload = async () => {
   if (!transcript || !department || !semester) {
-    alert("Lütfen PDF, bölüm ve dönem seçiniz.");
+    alert("Lütfen önce transkript, bölüm ve dönem bilgisini giriniz.");
     return;
   }
 
+  setLoading(true);
+
   const formData = new FormData();
   formData.append("file", transcript);
+  formData.append("departmentId", department);
+  formData.append("semester", semester);
 
   try {
-    const response = await axios.post(
-      `/Transcript/upload?departmentId=${department}&semester=${semester}`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    const response = await axios.post("/api/Transcript/upload", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
     const { matched, unmatched } = response.data;
     setMatchedCourses(matched);
     setUnmatchedCourses(unmatched);
+
+    console.log("✅ Eşleşen dersler:", matched);
+    console.log("❌ Uyumsuz dersler:", unmatched);
   } catch (err) {
-    console.error("Yükleme hatası:", err);
-    alert("Bir hata oluştu.");
+    console.error("Yükleme hatası:", err.response?.data || err.message);
+    alert("Eşleştirme başarısız. Konsolu kontrol edin.");
+  } finally {
+    setLoading(false);
   }
 };
+
+
+  const colorClasses = {
+    green: {
+      border: "border-green-500",
+      bg: "bg-green-700 bg-opacity-20",
+      text: "text-green-400",
+    },
+    red: {
+      border: "border-red-500",
+      bg: "bg-red-700 bg-opacity-20",
+      text: "text-red-400",
+    },
+  };
 
 
   return (
@@ -114,7 +133,6 @@ const YatayGecisScreen = () => {
 
         {/* Dropdownlar */}
         <div className="grid md:grid-cols-4 gap-4 mb-8">
-          {/* Dropdownlar tek tek */}
           {[{
             label: "🎓 Üniversite",
             value: university,
@@ -220,9 +238,14 @@ const YatayGecisScreen = () => {
         <div className="text-center mb-10">
           <button
             onClick={handleFileUpload}
-            className="px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-black font-semibold rounded"
+            disabled={loading}
+            className={`px-6 py-2 font-semibold rounded transition ${
+              loading
+                ? "bg-gray-500 cursor-not-allowed"
+                : "bg-yellow-500 hover:bg-yellow-600 text-black"
+            }`}
           >
-            🔍 Eşleştirmeyi Başlat
+            {loading ? "Eşleştiriliyor..." : "🔍 Eşleştirmeyi Başlat"}
           </button>
         </div>
 
@@ -236,8 +259,8 @@ const YatayGecisScreen = () => {
           items: unmatchedCourses,
           color: "red"
         }].map(({ title, items, color }, i) => (
-          <div key={i} className={`mb-8 p-4 border border-${color}-500 bg-${color}-700 bg-opacity-20 rounded`}>
-            <h3 className={`text-lg font-bold text-${color}-400 mb-4`}>{title}</h3>
+          <div key={i} className={`mb-8 p-4 rounded overflow-y-auto max-h-64 ${colorClasses[color].border} ${colorClasses[color].bg}`}>
+            <h3 className={`text-lg font-bold mb-4 ${colorClasses[color].text}`}>{title}</h3>
             {items.length === 0 ? (
               <p className="text-gray-400">Henüz sonuç yok.</p>
             ) : (

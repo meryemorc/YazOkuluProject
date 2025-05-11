@@ -1,4 +1,3 @@
-// TranscriptCourseDto.cs
 namespace yaz_okulu_backend.Models.DTOs
 {
     public class TranscriptCourseDto
