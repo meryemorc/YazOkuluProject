@@ -7,53 +7,58 @@ using yaz_okulu_backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔌 Veritabanı bağlantısı (PostgreSQL)
+// 🔐 OpenAI Key kontrolü
+Console.WriteLine("OpenAI Key: " + builder.Configuration["OpenAI:ApiKey"]);
+
+// 📦 Service Kayıtları
+
+// OpenAI Servisi
+builder.Services.AddSingleton<OpenAiService>();
+
+// PostgreSQL Veritabanı
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-    
 
-// 🌐 CORS ayarı (React frontend localhost:3000 için)
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowFrontend", policy =>
-    {
-        policy.WithOrigins("http://localhost:3000") // Frontend adresi
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-});
-
-// 🔐 JWT Authentication yapılandırması
+// JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(
-                builder.Configuration["Jwt:Key"]!)),
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]!)),
             ValidateIssuer = false,
             ValidateAudience = false
         };
     });
 
-// 📦 Controller ve Swagger hizmetleri
-builder.Services.AddControllers();
+// CORS (React localhost:3000 için)
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+// Diğer servisler
 builder.Services.AddScoped<CourseMatcherService>();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<TranscriptParserService>();
-builder.Services.AddScoped<CourseMatcherService>();
 builder.Services.AddScoped<ITranscriptService, TranscriptService>();
 builder.Services.AddScoped<YgCourseService>();
 
+// Controller ve Swagger
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-
-
-
+// 🔨 Artık uygulamayı build edebiliriz
 var app = builder.Build();
 
-// 🧪 Swagger (sadece development ortamında)
+// 🧪 Swagger sadece development'ta aktif
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -62,7 +67,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// 🛡️ Authentication'dan önce CORS kullanılmalı
 app.UseCors("AllowFrontend");
 
 app.UseAuthentication();

@@ -1,0 +1,13 @@
+# Output folders
+bin/
+obj/
+
+# User secrets and local configs
+appsettings.Development.json
+
+# Rider & VSCode config files
+.vscode/
+.idea/
+
+yaz-okulu-backend/bin/
+yaz-okulu-backend/obj/
