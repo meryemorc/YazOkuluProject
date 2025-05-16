@@ -11,3 +11,7 @@ appsettings.Development.json
 
 yaz-okulu-backend/bin/
 yaz-okulu-backend/obj/
+
+**/appsettings*.json
+
+.env

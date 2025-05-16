@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
+import ChatDrawer from "../components/Chatdrawer";
+
 
 const YatayGecisScreen = () => {
   const [transcript, setTranscript] = useState(null);
@@ -18,6 +20,8 @@ const YatayGecisScreen = () => {
   const [courses, setCourses] = useState([]);
 
   const [loading, setLoading] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+
 
   useEffect(() => {
     axios.get("/api/YgUniversity")
@@ -249,11 +253,12 @@ const YatayGecisScreen = () => {
   </button>
 
   <button
-    onClick={() => alert("Bu özellik yakında aktif olacak 🤖")}
-    className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded transition"
-  >
-    🤖 SummerSchoolAsistanla Eşleştir
-  </button>
+  onClick={() => setChatOpen(true)}
+  className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded transition"
+>
+  🤖 SummerSchoolAsistan
+</button>
+
 </div>
 
 
@@ -281,6 +286,7 @@ const YatayGecisScreen = () => {
           </div>
         ))}
       </div>
+      <ChatDrawer open={chatOpen} onClose={() => setChatOpen(false)} />
     </div>
   );
 };
