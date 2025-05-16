@@ -26,4 +26,5 @@ namespace yaz_okulu_backend.Controllers
     {
         public string Message { get; set; }
     }
+    
 }
