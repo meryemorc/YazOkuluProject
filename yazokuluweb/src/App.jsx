@@ -6,6 +6,7 @@ import LoginScreen from "./pages/LoginScreen";
 import RegisterScreen from "./pages/RegisterScreen";
 import YazOkuluScreen from "./pages/Yazokuluscreen";
 import YatayGecisScreen from "./pages/Yataygecisscreen";
+import SistemHakkindaScreen from "./pages/SistemHakkindaScreen";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<MainLayout><HomeScreen /></MainLayout>} />
         <Route path="/yaz-okulu" element={<MainLayout><YazOkuluScreen /></MainLayout>} />
         <Route path="/yatay-gecis" element={<MainLayout><YatayGecisScreen /></MainLayout>} />
+        <Route path="/sistem-hakkinda" element={<SistemHakkindaScreen />} />
       </Routes>
     </Router>
   );

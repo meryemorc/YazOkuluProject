@@ -32,6 +32,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+    
+builder.Services.AddHttpClient<CourseService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5275"); // backend base URL'in
+});
 
 // CORS (React localhost:3000 için)
 builder.Services.AddCors(options =>

@@ -21,6 +21,10 @@ const YatayGecisScreen = () => {
 
   const [loading, setLoading] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const [chat, setChat] = useState([]);
+  const [misplacedCourses, setMisplacedCourses] = useState([]);
+
+
 
 
   useEffect(() => {
@@ -128,6 +132,41 @@ const YatayGecisScreen = () => {
       text: "text-red-400",
     },
   };
+  const handleFinalReview = async () => {
+  try {
+    const universityName = universities.find(u => u.id === parseInt(university))?.name;
+    const departmentName = departments.find(d => d.id === parseInt(department))?.name;
+
+    const response = await axios.post("/api/chatbot/final-review", {
+      university: universityName,
+      department: departmentName,
+      semester: parseInt(semester),
+      departmentId: parseInt(department),
+      unmatchedCourses: unmatchedCourses.map(c => `${c.courseCode} - ${c.courseName}`)
+    });
+
+    const botText = response.data.response;
+
+    // Chatbot mesajından dersleri ayıklama
+    const matches = botText.match(/- ([A-ZÇĞİÖŞÜ0-9]+) - (.+?)(?=\n|$)/g);
+
+    const parsed = matches?.map(line => {
+      const [code, name] = line.replace("- ", "").split(" - ");
+      return { courseCode: code.trim(), courseName: name.trim() };
+    }) || [];
+
+    // ChatDrawer'ı açma, sadece sarı kartı göster
+    setMisplacedCourses(parsed);
+
+  } catch (err) {
+    console.error("Final review hatası:", err);
+    alert("Chatbot karşılaştırması başarısız.");
+  }
+};
+
+
+
+
 
 
   return (
@@ -262,7 +301,7 @@ const YatayGecisScreen = () => {
 </div>
 
 
-        {/* Sonuç Kartları */}
+                {/* Sonuç Kartları */}
         {[{
           title: "✅ Uyumlu Dersler",
           items: matchedCourses,
@@ -285,8 +324,44 @@ const YatayGecisScreen = () => {
             )}
           </div>
         ))}
+
+        {/* ✅ SON KONTROL BUTONU */}
+        {unmatchedCourses.length > 0 && (
+          <div className="flex justify-center mb-10">
+            <button
+              onClick={handleFinalReview}
+              className="px-6 py-2 bg-purple-700 hover:bg-purple-800 text-white font-semibold rounded transition"
+            >
+              🤖 Son Kontrol: Chatbotla Karşılaştır
+            </button>
+          </div>
+        )}
+        {misplacedCourses && (
+  <div className="mb-8 p-4 rounded overflow-y-auto max-h-64 border border-yellow-500 bg-yellow-800 bg-opacity-20">
+    <h3 className="text-lg font-bold mb-4 text-yellow-300">⚠️ Chatbot’a Göre Yanlış Eşleşmiş Dersler</h3>
+
+    {misplacedCourses.length === 0 ? (
+      <p className="text-yellow-100">Chatbot’a göre yanlış eşleşmiş ders bulunamadı.</p>
+    ) : (
+      <ul className="list-disc ml-4 space-y-1 text-yellow-200">
+        {misplacedCourses.map((c, i) => (
+          <li key={i}>{c.courseCode} - {c.courseName}</li>
+        ))}
+      </ul>
+    )}
+  </div>
+)}
+
+
+        {/* ✅ CHATBOT PANELİ */}
+        <ChatDrawer
+          open={chatOpen}
+          onClose={() => setChatOpen(false)}
+          chat={chat}
+          setChat={setChat}
+        />
+       
       </div>
-      <ChatDrawer open={chatOpen} onClose={() => setChatOpen(false)} />
     </div>
   );
 };

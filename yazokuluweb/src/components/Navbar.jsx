@@ -1,59 +1,61 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GraduationCap } from "lucide-react";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
 
+  const navItems = [
+    { path: "/home", label: "Anasayfa" },
+    { path: "/yaz-okulu", label: "Yaz Okulu" },
+    { path: "/yatay-gecis", label: "Ders Denklik" },
+    { path: "/sistem-hakkinda", label: "Sistem Hakkında" },
+  ];
+
   return (
-    <header className="bg-gray-900 text-white shadow-md">
-      <div className="container mx-auto flex flex-wrap p-4 flex-col md:flex-row items-center justify-between">
-        {/* Logo */}
-        <Link to="/home" className="flex items-center mb-2 md:mb-0 no-underline">
-  <GraduationCap className="w-10 h-10 p-2 bg-yellow-500 rounded-full text-white" />
-  <span className="ml-3 text-2xl font-semibold tracking-wide text-white not-italic">
-    SummerSchool
-  </span>
+    <header className="bg-gray-900 shadow-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link
+  to="/home"
+  className="flex items-center gap-2 no-underline hover:underline decoration-yellow-400 decoration-2 underline-offset-4"
+>
+  <GraduationCap className="w-9 h-9 p-2 bg-yellow-500 text-black rounded-full" />
+  <span className="text-xl font-semibold text-white">SummerSchool</span>
 </Link>
 
-        {/* Navigation Buttons */}
-        <nav className="flex flex-wrap gap-3">
-          <Link
-            to="/home"
-            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-medium px-4 py-2 rounded transition"
-          >
-            Anasayfa
-          </Link>
-          <Link
-            to="/yaz-okulu"
-            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-medium px-4 py-2 rounded transition"
-          >
-            Yaz Okulu
-          </Link>
-          <Link
-            to="/yatay-gecis"
-            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-medium px-4 py-2 rounded transition"
-          >
-            Ders Denklik
-          </Link>
-          <Link
-            to="/profile"
-            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-medium px-4 py-2 rounded transition"
-          >
-            Profil
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-medium px-4 py-2 rounded transition"
-          >
-            Çıkış Yap
-          </button>
-        </nav>
+
+          {/* Nav Items */}
+          <nav className="flex items-center space-x-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`px-4 py-2 rounded-lg font-medium transition text-sm ${
+                  location.pathname === item.path
+                    ? "bg-yellow-500 text-gray-900"
+                    : "text-gray-200 hover:bg-yellow-600 hover:text-black"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <button
+              onClick={handleLogout}
+              className="ml-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-medium transition"
+            >
+              Çıkış Yap
+            </button>
+          </nav>
+        </div>
       </div>
     </header>
   );
