@@ -9,6 +9,8 @@ import YatayDepartmentSelect from '../components/YatayDepartmentSelect';
 import YataySemesterSelect from '../components/YataySemesterSelect';
 import YatayCourseList from '../components/YatayCourseList';
 import CourseResultList from '../components/CourseResultList';
+import ChatDrawerMobile from '../components/ChatDrawerMobile';
+
 import styles from '../styles/YatayGecisScreenStyles';
 
 const YatayGecisScreen = () => {
@@ -17,11 +19,13 @@ const YatayGecisScreen = () => {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedSemester, setSelectedSemester] = useState(null);
   const [transcript, setTranscript] = useState(null);
+
   const [matchedCourses, setMatchedCourses] = useState([]);
   const [unmatchedCourses, setUnmatchedCourses] = useState([]);
   const [showMatched, setShowMatched] = useState(false);
   const [showUnmatched, setShowUnmatched] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [chatVisible, setChatVisible] = useState(false);
 
   const pickPDF = async () => {
     try {
@@ -92,12 +96,11 @@ const YatayGecisScreen = () => {
         <Text style={styles.uploadButtonText}>📄 PDF Yükle</Text>
       </TouchableOpacity>
 
-     {transcript && (
-  <TouchableOpacity style={styles.selectedFileCard} activeOpacity={1}>
-    <Text style={styles.selectedFileText}>📄 {transcript.name}</Text>
-  </TouchableOpacity>
-)}
-
+      {transcript && (
+        <TouchableOpacity style={styles.selectedFileCard} activeOpacity={1}>
+          <Text style={styles.selectedFileText}>📄 {transcript.name}</Text>
+        </TouchableOpacity>
+      )}
 
       <TouchableOpacity onPress={handleUpload} style={styles.matchButton} disabled={loading}>
         <Text style={styles.matchButtonText}>
@@ -127,6 +130,17 @@ const YatayGecisScreen = () => {
           onToggle={() => setShowUnmatched(!showUnmatched)}
         />
       )}
+
+      {/* 🤖 Chatbot Butonu */}
+      <TouchableOpacity onPress={() => setChatVisible(true)} style={styles.chatButton}>
+        <Text style={styles.chatButtonText}>🤖 Chatbot</Text>
+      </TouchableOpacity>
+
+      {/* ChatDrawerMobile bileşeni */}
+      <ChatDrawerMobile
+        visible={chatVisible}
+        onClose={() => setChatVisible(false)}
+      />
     </ScrollView>
   );
 };
