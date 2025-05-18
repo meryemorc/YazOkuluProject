@@ -88,7 +88,7 @@ const ChatDrawerMobile = ({
 
         {loading && (
           <View style={{ marginTop: 8 }}>
-            <ActivityIndicator color="#38bdf8" />
+            <ActivityIndicator color="#408E91" />
           </View>
         )}
       </View>
@@ -99,7 +99,7 @@ const ChatDrawerMobile = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f172a',
+    backgroundColor: '#526D82',
     paddingTop: 40,
     paddingHorizontal: 12,
   },
@@ -107,15 +107,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 12,
+    alignItems: 'center',
   },
   title: {
-    color: '#38bdf8',
+    color: '#FFFFFF',
     fontSize: 18,
     fontWeight: 'bold',
   },
   close: {
     fontSize: 22,
-    color: '#fff',
+    color: '#FFFFFF',
   },
   chatArea: {
     flex: 1,
@@ -123,20 +124,23 @@ const styles = StyleSheet.create({
   },
   userBubble: {
     alignSelf: 'flex-end',
-    backgroundColor: '#38bdf8',
+    backgroundColor: '#408E91',
     padding: 10,
     borderRadius: 10,
     marginBottom: 8,
+    maxWidth: '80%',
   },
   botBubble: {
     alignSelf: 'flex-start',
-    backgroundColor: '#334155',
+    backgroundColor: '#354A5F',
     padding: 10,
     borderRadius: 10,
     marginBottom: 8,
+    maxWidth: '80%',
   },
   messageText: {
     color: '#fff',
+    fontSize: 14,
   },
 });
 

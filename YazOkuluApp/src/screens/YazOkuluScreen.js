@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-  RefreshControl,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {View,Text,ScrollView,TextInput,TouchableOpacity,RefreshControl,} from 'react-native';
 import axios from '../api/axios';
-
+import { useNavigation } from '@react-navigation/native';
 import UniversitySelect from '../components/UniversitySelect';
 import FacultySelect from '../components/FacultySelect';
 import DepartmentSelect from '../components/DepartmentSelect';
 import styles from '../styles/YazOkuluScreenStyles';
+import ChatDrawerMobile from '../components/ChatDrawerMobile';
+
 
 const YazOkuluScreen = () => {
-  const navigation = useNavigation();
-
+const navigation = useNavigation();
+  const [chatVisible, setChatVisible] = useState(false);
   const [selectedUniversity, setSelectedUniversity] = useState(null);
   const [selectedFaculty, setSelectedFaculty] = useState(null);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
@@ -63,6 +57,7 @@ const YazOkuluScreen = () => {
   };
 
   return (
+    <View style={{ flex: 1 }}>
     <ScrollView
       contentContainerStyle={styles.container}
       refreshControl={
@@ -120,14 +115,28 @@ const YazOkuluScreen = () => {
       )}
 
       <View style={{ marginTop: 30, marginBottom: 40, alignItems: 'center' }}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Home')}
-          style={styles.backButton}
-        >
-          <Text style={styles.backButtonText}>Ana Sayfaya Dön</Text>
-        </TouchableOpacity>
+        
       </View>
     </ScrollView>
+    <TouchableOpacity
+  onPress={() => setChatVisible(true)}
+  style={styles.floatingChatButton}
+>
+  <Text style={styles.floatingChatIcon}>🤖</Text>
+</TouchableOpacity>
+
+<ChatDrawerMobile
+  visible={chatVisible}
+  onClose={() => setChatVisible(false)}
+/>
+
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Home')}
+      style={styles.floatingHomeButton}
+    >
+  <Text style={styles.floatingHomeIcon}>🏠</Text>
+</TouchableOpacity>
+</View>
   );
 };
 
