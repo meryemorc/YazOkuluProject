@@ -116,6 +116,76 @@ selectedFileText: {
   fontWeight: 'bold',
   fontSize: 15,
 },
+yellowCard: {
+  marginTop: 20,
+  padding: 12,
+  borderRadius: 10,
+  backgroundColor: '#213555',
+  borderWidth: 1,
+  borderColor: '#6A669D',
+},
+yellowCardTitle: {
+  color: '#ffffff',
+  fontWeight: 'bold',
+  marginBottom: 6,
+},
+yellowCardText: {
+  color: '#ffffff',
+  fontSize: 14,
+},
+chatFinalButton: {
+  backgroundColor: '#176B87',
+  padding: 12,
+  borderRadius: 8,
+  alignItems: 'center',
+  marginVertical: 12,
+},
+chatFinalButtonText: {
+  color: '#fff',
+  fontWeight: 'bold',
+  fontSize: 16,
+},
+floatingChatButton: {
+  position: 'absolute',
+  bottom: 28,
+  right: 24,
+  backgroundColor: '#9DB2BF', // turkuaz ton
+  width: 60,
+  height: 60,
+  borderRadius: 28,
+  justifyContent: 'center',
+  alignItems: 'center',
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.3,
+  shadowRadius: 4,
+  elevation: 5,
+  zIndex: 999,
+},
+floatingChatIcon: {
+  fontSize: 24,
+  color: '#fff',
+  fontWeight: 'bold',
+},
+floatingHomeButton: {
+  position: 'absolute',
+  bottom: 20,
+  left: 20,
+  backgroundColor: '#5DB996',
+  width: 50,
+  height: 50,
+  borderRadius: 25,
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 999,
+  elevation: 6,
+},
+floatingHomeIcon: {
+  color: '#fff',
+  fontSize: 22,
+}
+
+
 
 });
 

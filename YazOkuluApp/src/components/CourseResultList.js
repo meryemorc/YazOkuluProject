@@ -6,49 +6,54 @@ const CourseResultList = ({ title, icon, color, courses, expanded, onToggle }) =
 
   return (
     <View style={{ marginTop: 20 }}>
-      <TouchableOpacity onPress={onToggle} style={[styles.toggleCard, { backgroundColor: color }]}>
-        <Text style={styles.toggleText}>{icon} {title}</Text>
+      {/* Başlık Butonu */}
+      <TouchableOpacity onPress={onToggle} style={[styles.headerCard, { backgroundColor: color }]}>
+        <Text style={styles.headerText}>{icon} {title}</Text>
       </TouchableOpacity>
 
+      {/* Scrollable Kart */}
       {expanded && (
-        <ScrollView style={styles.scrollWrapper} contentContainerStyle={styles.scrollContent} nestedScrollEnabled={true}>
-          {courses.map((c, index) => (
-            <View key={index} style={styles.courseCard}>
-              <Text style={styles.courseText}>{c.courseCode} - {c.courseName}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <View style={styles.cardContainer}>
+          <ScrollView style={styles.scrollArea} nestedScrollEnabled>
+            {courses.map((course, index) => (
+              <View key={index} style={styles.courseCard}>
+                <Text style={styles.courseText}>{course.courseCode} - {course.courseName}</Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
       )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  toggleCard: {
+  headerCard: {
     padding: 12,
     borderRadius: 10,
     alignItems: 'center',
   },
-  toggleText: {
+  headerText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
   },
-  scrollWrapper: {
-    maxHeight: 300,
+  cardContainer: {
     backgroundColor: '#fff',
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 10,
     marginTop: 8,
+    maxHeight: 300, // içerik kayarsa scrollable olsun
   },
-  scrollContent: {
-    padding: 10,
+  scrollArea: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
   },
   courseCard: {
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#f4f4f4',
     padding: 10,
-    borderRadius: 8,
+    borderRadius: 6,
     marginBottom: 6,
     borderWidth: 1,
     borderColor: '#ddd',
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
   courseText: {
     fontSize: 15,
     fontWeight: '500',
-    color: '#111',
+    color: '#111827',
   },
 });
 

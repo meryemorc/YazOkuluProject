@@ -12,6 +12,7 @@ import axios from '../api/axios';
 import styles from '../styles/LoginScreenStyles';
 import { useAuth } from '../context/AuthContext';
 
+
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

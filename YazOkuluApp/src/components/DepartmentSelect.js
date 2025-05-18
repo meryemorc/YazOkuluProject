@@ -1,77 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, Modal, FlatList, View, StyleSheet } from 'react-native';
-import axios from '../api/axios';
-import Icon from 'react-native-vector-icons/Ionicons';
+import React from 'react';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 
-const DepartmentSelect = ({ facultyId, selectedDepartment, onSelect }) => {
-  const [departments, setDepartments] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  useEffect(() => {
-    if (!facultyId) return;
-    axios.get('/Department').then(res => {
-      const filtered = res.data.filter(d => d.faculty_id === parseInt(facultyId));
-      setDepartments(filtered);
-    });
-  }, [facultyId]);
+const CourseResultList = ({ title, icon, color, courses, expanded, onToggle }) => {
+  if (!courses || courses.length === 0) return null;
 
   return (
-    <>
-      <Text style={styles.label}>Bölüm</Text>
-      <TouchableOpacity
-        style={styles.selectBox}
-        onPress={() => setModalVisible(true)}
-        disabled={!facultyId}
-      >
-        <Text style={styles.selectText}>
-          {selectedDepartment?.name || 'Bölüm Seçin'}
-        </Text>
+    <View style={{ marginTop: 20 }}>
+      {/* Başlık Butonu */}
+      <TouchableOpacity onPress={onToggle} style={[styles.headerCard, { backgroundColor: color }]}>
+        <Text style={styles.headerText}>{icon} {title}</Text>
       </TouchableOpacity>
 
-      <Modal visible={modalVisible} transparent animationType="slide">
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalBox}>
-             <TouchableOpacity
-                          style={styles.closeIcon}
-                          onPress={() => setModalVisible(false)}
-                        >
-                          <Icon name="close-outline" size={24} color="#000" />
-                        </TouchableOpacity>
-            <FlatList
-              data={departments}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.modalItem}
-                  onPress={() => {
-                    onSelect(item);
-                    setModalVisible(false);
-                  }}
-                >
-                  <Text>{item.name}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </View>
+      {/* Scrollable Kart */}
+      {expanded && (
+        <View style={styles.cardContainer}>
+          <ScrollView style={styles.scrollArea} nestedScrollEnabled>
+            {courses.map((course, index) => (
+              <View key={index} style={styles.courseCard}>
+                <Text style={styles.courseText}>{course.courseCode} - {course.courseName}</Text>
+              </View>
+            ))}
+          </ScrollView>
         </View>
-      </Modal>
-    </>
+      )}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  label: { fontSize: 16, marginBottom: 6, color: '#333' },
-  selectBox: {
-    padding: 12, backgroundColor: '#fff', borderRadius: 8,
-    marginBottom: 12, borderWidth: 1, borderColor: '#ccc',
+  headerCard: {
+    padding: 12,
+    borderRadius: 10,
+    alignItems: 'center',
   },
-  selectText: { color: '#000' },
-  modalOverlay: {
-    flex: 1, backgroundColor: 'rgba(0,0,0,0.3)',
-    justifyContent: 'center', alignItems: 'center',
+  headerText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
-  modalBox: { width: '80%', backgroundColor: '#fff', borderRadius: 10, maxHeight: 400, padding: 20 },
-  modalItem: { paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: '#ddd' },
+  cardContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    marginTop: 8,
+    maxHeight: 300, // içerik kayarsa scrollable olsun
+  },
+  scrollArea: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+  },
+  courseCard: {
+    backgroundColor: '#f4f4f4',
+    padding: 10,
+    borderRadius: 6,
+    marginBottom: 6,
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  courseText: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: '#111827',
+  },
 });
 
-export default DepartmentSelect;
+export default CourseResultList;

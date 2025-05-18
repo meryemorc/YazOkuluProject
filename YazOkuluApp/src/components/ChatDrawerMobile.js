@@ -1,27 +1,65 @@
 // components/ChatDrawerMobile.js
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Modal, ScrollView, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Modal,
+  ScrollView,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import axios from '../api/axios';
 
-const ChatDrawerMobile = ({ visible, onClose }) => {
-  const [message, setMessage] = useState('');
+const ChatDrawerMobile = ({
+  visible,
+  onClose,
+  unmatchedCourses,
+  selectedUniversity,
+  selectedDepartment,
+  selectedSemester,
+}) => {
   const [chat, setChat] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const sendMessage = async () => {
-    if (!message.trim()) return;
+  useEffect(() => {
+    if (visible) {
+      handleChatbotQuery();
+    }
+  }, [visible]);
 
-    const updatedChat = [...chat, { sender: 'user', text: message }];
-    setChat(updatedChat);
-    setMessage('');
+  const handleChatbotQuery = async () => {
+    if (!unmatchedCourses?.length || !selectedUniversity || !selectedDepartment || !selectedSemester) {
+      setChat([{ sender: 'bot', text: 'Eksik bilgi: Chatbot analizi yapılamıyor.' }]);
+      return;
+    }
+
+    const universityName = selectedUniversity.name;
+    const departmentName = selectedDepartment.name;
+    const semester = parseInt(selectedSemester);
+    const departmentId = selectedDepartment.id;
+
+    const requestBody = {
+      university: universityName,
+      department: departmentName,
+      semester,
+      departmentId,
+      unmatchedCourses: unmatchedCourses.map(
+        (c) => `${c.courseCode} - ${c.courseName}`
+      ),
+    };
+
     setLoading(true);
+    setChat([{ sender: 'bot', text: '🔎 Chatbot analiz yapıyor, lütfen bekleyin...' }]);
 
     try {
-      const response = await axios.post('/chatbot', { message });
-      const reply = response.data.response;
-      setChat([...updatedChat, { sender: 'bot', text: reply }]);
+      const response = await axios.post('/chatbot/final-review', requestBody);
+      const botText = response.data.response;
+      setChat([{ sender: 'bot', text: botText }]);
     } catch (error) {
-      setChat([...updatedChat, { sender: 'bot', text: '❌ Cevap alınamadı.' }]);
+      console.error('Chatbot hatası:', error?.response?.data || error.message);
+      setChat([{ sender: 'bot', text: '❌ Chatbot cevabı alınamadı.' }]);
     } finally {
       setLoading(false);
     }
@@ -39,25 +77,20 @@ const ChatDrawerMobile = ({ visible, onClose }) => {
 
         <ScrollView style={styles.chatArea}>
           {chat.map((item, index) => (
-            <View key={index} style={item.sender === 'user' ? styles.userBubble : styles.botBubble}>
+            <View
+              key={index}
+              style={item.sender === 'user' ? styles.userBubble : styles.botBubble}
+            >
               <Text style={styles.messageText}>{item.text}</Text>
             </View>
           ))}
         </ScrollView>
 
-        <View style={styles.inputArea}>
-          <TextInput
-            placeholder="Bir mesaj yaz..."
-            placeholderTextColor="#aaa"
-            style={styles.input}
-            value={message}
-            onChangeText={setMessage}
-            onSubmitEditing={sendMessage}
-          />
-          <TouchableOpacity onPress={sendMessage} disabled={loading} style={styles.sendButton}>
-            <Text style={styles.sendText}>Gönder</Text>
-          </TouchableOpacity>
-        </View>
+        {loading && (
+          <View style={{ marginTop: 8 }}>
+            <ActivityIndicator color="#38bdf8" />
+          </View>
+        )}
       </View>
     </Modal>
   );
@@ -104,29 +137,6 @@ const styles = StyleSheet.create({
   },
   messageText: {
     color: '#fff',
-  },
-  inputArea: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  input: {
-    flex: 1,
-    backgroundColor: '#1e293b',
-    color: '#fff',
-    padding: 10,
-    borderRadius: 8,
-    marginRight: 8,
-  },
-  sendButton: {
-    backgroundColor: '#38bdf8',
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-  },
-  sendText: {
-    color: '#000',
-    fontWeight: 'bold',
   },
 });
 

@@ -10,15 +10,21 @@ import YataySemesterSelect from '../components/YataySemesterSelect';
 import YatayCourseList from '../components/YatayCourseList';
 import CourseResultList from '../components/CourseResultList';
 import ChatDrawerMobile from '../components/ChatDrawerMobile';
+import { useNavigation } from '@react-navigation/native';
+
 
 import styles from '../styles/YatayGecisScreenStyles';
 
 const YatayGecisScreen = () => {
+  const navigation = useNavigation();
+
   const [selectedUniversity, setSelectedUniversity] = useState(null);
   const [selectedFaculty, setSelectedFaculty] = useState(null);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [selectedSemester, setSelectedSemester] = useState(null);
   const [transcript, setTranscript] = useState(null);
+  const [misplacedCourses, setMisplacedCourses] = useState([]);
+
 
   const [matchedCourses, setMatchedCourses] = useState([]);
   const [unmatchedCourses, setUnmatchedCourses] = useState([]);
@@ -26,6 +32,9 @@ const YatayGecisScreen = () => {
   const [showUnmatched, setShowUnmatched] = useState(false);
   const [loading, setLoading] = useState(false);
   const [chatVisible, setChatVisible] = useState(false);
+  const [chatbotLoading, setChatbotLoading] = useState(false);
+
+  
 
   const pickPDF = async () => {
     try {
@@ -81,7 +90,43 @@ const YatayGecisScreen = () => {
     }
   };
 
-  return (
+  const handleFinalReview = async () => {
+  if (!selectedUniversity || !selectedDepartment || !selectedSemester || unmatchedCourses.length === 0) {
+    Alert.alert("Eksik bilgi", "Lütfen üniversite, bölüm, dönem seçin ve eşleştirme yapın.");
+    return;
+  }
+
+  setChatbotLoading(true);
+
+  try {
+    const response = await axios.post("/Chatbot/final-review", {
+      university: selectedUniversity.name,
+      department: selectedDepartment.name,
+      semester: selectedSemester,
+      departmentId: selectedDepartment.id,
+      unmatchedCourses: unmatchedCourses.map(c => `${c.courseCode} - ${c.courseName}`)
+    });
+
+    const botText = response.data.response;
+    const matches = botText.match(/- ([A-ZÇĞİÖŞÜ0-9]+) - (.+?)(?=\n|$)/g);
+
+    const parsed = matches?.map(line => {
+      const [code, name] = line.replace("- ", "").split(" - ");
+      return { courseCode: code.trim(), courseName: name.trim() };
+    }) || [];
+
+    setMisplacedCourses(parsed);
+  } catch (err) {
+    console.error("Final review hatası:", err);
+    Alert.alert("Chatbot analizi başarısız.");
+  } finally {
+    setChatbotLoading(false);
+  }
+};
+
+
+return (
+  <View style={{ flex: 1 }}>
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Yatay Geçiş Başvurusu</Text>
 
@@ -131,18 +176,66 @@ const YatayGecisScreen = () => {
         />
       )}
 
-      {/* 🤖 Chatbot Butonu */}
-      <TouchableOpacity onPress={() => setChatVisible(true)} style={styles.chatButton}>
-        <Text style={styles.chatButtonText}>🤖 Chatbot</Text>
-      </TouchableOpacity>
+      {unmatchedCourses.length > 0 && (
+        <TouchableOpacity
+          onPress={handleFinalReview}
+          disabled={chatbotLoading}
+          style={[
+            styles.chatFinalButton,
+            chatbotLoading && { opacity: 0.6 }
+          ]}
+        >
+          <Text style={styles.chatFinalButtonText}>
+            {chatbotLoading ? '⏳ Eşleştiriliyor...' : '🤖 Son Kontrol: Chatbotla Karşılaştır'}
+          </Text>
+        </TouchableOpacity>
+      )}
 
-      {/* ChatDrawerMobile bileşeni */}
+      {misplacedCourses && (
+        <View style={styles.yellowCard}>
+          <Text style={styles.yellowCardTitle}>⚠️ Chatbot’a Göre Yanlış Eşleşmiş Dersler</Text>
+          {misplacedCourses.length === 0 ? (
+            <Text style={styles.yellowCardText}>Chatbot’a göre yanlış eşleşmiş ders bulunamadı.</Text>
+          ) : (
+            <View style={{ marginTop: 6 }}>
+              {misplacedCourses.map((course, i) => (
+                <Text key={i} style={styles.yellowCardText}>
+                  {course.courseCode} - {course.courseName}
+                </Text>
+              ))}
+            </View>
+          )}
+        </View>
+      )}
+
+      {/* ChatDrawer */}
       <ChatDrawerMobile
         visible={chatVisible}
         onClose={() => setChatVisible(false)}
+        unmatchedCourses={unmatchedCourses}
+        selectedUniversity={selectedUniversity}
+        selectedDepartment={selectedDepartment}
+        selectedSemester={selectedSemester}
       />
     </ScrollView>
-  );
-};
 
+    {/* Sabit Chatbot Butonu - scroll etkilenmez */}
+    <TouchableOpacity
+      onPress={() => setChatVisible(true)}
+      style={styles.floatingChatButton}
+    >
+      <Text style={styles.floatingChatIcon}>🤖</Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Home')}
+      style={styles.floatingHomeButton}
+    >
+  <Text style={styles.floatingHomeIcon}>🏠</Text>
+</TouchableOpacity>
+
+  </View>
+  
+);
+
+}
 export default YatayGecisScreen;
