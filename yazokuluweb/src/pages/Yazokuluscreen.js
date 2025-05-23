@@ -65,18 +65,20 @@ const YazOkuluScreen = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white px-6 py-8">
+    <div className="min-h-screen bg-[#F7FDFB] text-[#143D60] px-6 py-8">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold mb-2">🎓 Yaz Okulu Başvurusu</h1>
-          <p className="text-gray-400">Filtreleri kullanarak ders arayabilir veya üniversite seçimi yapabilirsiniz.</p>
+          <p className="text-[#555]">
+            Filtreleri kullanarak ders arayabilir veya üniversite seçimi yapabilirsiniz.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div>
             <label className="block mb-2 text-sm font-medium">Üniversite</label>
             <select
-              className="w-full p-2 bg-gray-800 text-white rounded"
+              className="w-full p-2 bg-white text-[#143D60] border border-[#90D1CA] rounded"
               value={selectedUniversity}
               onChange={(e) => setSelectedUniversity(e.target.value)}
             >
@@ -90,7 +92,7 @@ const YazOkuluScreen = () => {
           <div>
             <label className="block mb-2 text-sm font-medium">Fakülte</label>
             <select
-              className="w-full p-2 bg-gray-800 text-white rounded"
+              className="w-full p-2 bg-white text-[#143D60] border border-[#90D1CA] rounded"
               value={selectedFaculty}
               onChange={(e) => setSelectedFaculty(e.target.value)}
             >
@@ -104,7 +106,7 @@ const YazOkuluScreen = () => {
           <div>
             <label className="block mb-2 text-sm font-medium">Bölüm</label>
             <select
-              className="w-full p-2 bg-gray-800 text-white rounded"
+              className="w-full p-2 bg-white text-[#143D60] border border-[#90D1CA] rounded"
               value={selectedDepartment}
               onChange={(e) => setSelectedDepartment(e.target.value)}
             >
@@ -120,22 +122,22 @@ const YazOkuluScreen = () => {
           <input
             type="text"
             placeholder="Ders adı ya da kodu..."
-            className="w-full md:w-1/2 p-2 bg-gray-800 text-white rounded"
+            className="w-full md:w-1/2 p-2 bg-white text-[#143D60] border border-[#90D1CA] rounded"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
           />
           <button
             onClick={handleSearch}
-            className="ml-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded"
+            className="ml-2 px-4 py-2 bg-[#077A7D] hover:bg-[#066467] text-white rounded"
           >
             Ara
           </button>
         </div>
 
-        <div className="overflow-x-auto bg-gray-800 rounded shadow">
+        <div className="overflow-x-auto rounded shadow bg-white">
           <table className="w-full table-auto text-sm text-left">
-            <thead className="bg-gray-700 text-white">
+            <thead className="bg-[#90D1CA] text-[#143D60]">
               <tr>
                 <th className="px-4 py-2">Kod</th>
                 <th className="px-4 py-2">Ders Adı</th>
@@ -146,13 +148,13 @@ const YazOkuluScreen = () => {
             <tbody>
               {courses.length === 0 ? (
                 <tr>
-                  <td colSpan="4" className="px-4 py-2 text-center text-gray-400">
+                  <td colSpan="4" className="px-4 py-2 text-center text-[#999]">
                     Gösterilecek ders yok.
                   </td>
                 </tr>
               ) : (
                 courses.map((c) => (
-                  <tr key={c.id} className="border-t border-gray-700">
+                  <tr key={c.id} className="border-t border-[#90D1CA]">
                     <td className="px-4 py-2">{c.course_code}</td>
                     <td className="px-4 py-2">{c.course_name}</td>
                     <td className="px-4 py-2">{c.kredi}</td>

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import axios from "../api/axios";
 
-const ChatDrawer = ({ open, onClose }) => {
+const ChatDrawer = ({ open, onClose, chat, setChat }) => {
   const [message, setMessage] = useState("");
-  const [chat, setChat] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
@@ -40,20 +39,20 @@ const ChatDrawer = ({ open, onClose }) => {
         right: open ? 0 : "-100%",
         width: "30vw",
         height: "100vh",
-        backgroundColor: "#1e1e2f",
-        color: "white",
+        backgroundColor: "#F7FDFB",
+        color: "#143D60",
         padding: 20,
         transition: "right 0.3s ease-in-out",
         zIndex: 999,
-        boxShadow: "-3px 0 10px rgba(0,0,0,0.3)",
+        boxShadow: "-3px 0 10px rgba(0,0,0,0.2)",
         display: "flex",
         flexDirection: "column",
       }}
     >
       {/* Üst başlık */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <h4 className="text-purple-400 text-lg font-semibold">🤖 SummerSchoolAsistan</h4>
-        <button onClick={onClose} className="text-white text-2xl hover:text-red-400">✖</button>
+      <div className="flex justify-between items-center">
+        <h4 className="text-[#2D9596] text-lg font-semibold">🤖 SummerSchoolAsistan</h4>
+        <button onClick={onClose} className="text-2xl hover:text-red-600">✖</button>
       </div>
 
       {/* Mesajlar */}
@@ -68,7 +67,8 @@ const ChatDrawer = ({ open, onClose }) => {
           >
             <span
               style={{
-                background: item.sender === "user" ? "#5791C3" : "#2d2d45",
+                background: item.sender === "user" ? "#2D9596" : "#90D1CA",
+                color: "#fff",
                 padding: "10px 14px",
                 borderRadius: 12,
                 display: "inline-block",
@@ -83,10 +83,10 @@ const ChatDrawer = ({ open, onClose }) => {
       </div>
 
       {/* Giriş alanı */}
-      <div style={{ display: "flex", gap: 8 }}>
+      <div className="flex gap-2">
         <input
           type="text"
-          className="form-control"
+          className="flex-grow px-4 py-2 rounded border border-[#90D1CA] focus:outline-none"
           placeholder="Bir soru yaz..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -95,7 +95,11 @@ const ChatDrawer = ({ open, onClose }) => {
         <button
           onClick={sendMessage}
           disabled={loading}
-          className="btn btn-sm btn-success"
+          className={`px-4 py-2 rounded font-semibold text-white ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-[#077A7D] hover:bg-[#066467]"
+          }`}
         >
           Gönder
         </button>

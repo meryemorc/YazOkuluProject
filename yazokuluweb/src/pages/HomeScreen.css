@@ -1,9 +1,11 @@
 :root {
-  --main-bg: #dbdbdb;
-  --primary: #2d336b;
-  --highlight: #efb036;
-  --text-light: #ffffff;
+  --main-bg: #F7FDFB;          /* arka plan çok açık yeşilimsi */
+  --primary: #309898;          /* ana buton/kart rengi */
+  --highlight: #90D1CA;        /* vurgu rengi */
+  --text-light: #ffffff;       /* beyaz yazı */
 }
+
+
 
 body {
   margin: 0;

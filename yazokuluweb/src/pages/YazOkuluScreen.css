@@ -1,153 +1,157 @@
 :root {
-    --main-bg: #dbdbdb;
-    --primary: #2d336b;
-    --highlight: #efb036;
-    --text-light: #ffffff;
-  }
-  
-  body {
-    background-color: var(--main-bg);
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .yazokulu-container {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 2rem;
-    max-width: 960px;
-    margin: 2rem auto;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .yazokulu-container h1 {
-    color: var(--primary) !important;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 0.5rem;
-  }
-  
-  .yazokulu-container h1::after {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 3px;
-    background-color: var(--highlight);
-    margin: 0.5rem auto 0;
-    border-radius: 2px;
-  }
-  
-  h4, h5 {
-    font-weight: 600;
-    color: var(--primary);
-    text-align: center;
-  }
-  
-  .text-muted {
-    color: #666 !important;
-  }
-  
-  /* Dropdown stil düzenlemesi */
-  select.form-select {
-    box-shadow: none;
-    transition: border-color 0.2s ease-in-out;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    color: #222;
-  }
-  
-  select.form-select:focus {
-    border-color: var(--highlight);
-    box-shadow: 0 0 0 0.2rem rgba(239, 176, 54, 0.25);
-  }
-  
-  /* Chrome/Edge/Firefox dropdown görünüm iyileştirmesi */
-  select.form-select option {
-    color: #222;
-    background-color: #fff;
-  }
-  
-  /* Seçili item üzerine geldiğinde */
-  select.form-select option:checked,
-  select.form-select option:focus,
-  select.form-select option:hover {
-    background-color: var(--highlight);
-    color: #000;
-  }
-  
-  /* Arama kutusu */
-  .input-group input {
-    border-radius: 6px 0 0 6px;
-    border: 1px solid #ccc;
-  }
-  
-  /* Arama butonu */
-  .input-group button,
-  .btn-primary {
-    border-radius: 0 6px 6px 0;
-    background-color: var(--primary);
-    border-color: var(--primary);
-    color: var(--text-light);
-  }
-  
-  .input-group button:hover,
-  .btn-primary:hover {
-    background-color: var(--highlight);
-    border-color: var(--highlight);
-    color: #222;
-  }
-  
-  /* Tablo stilleri */
-  .table thead th {
-    vertical-align: middle;
-    font-weight: 600;
-    font-size: 0.95rem;
-    background-color: var(--highlight);
-    color: #222;
-    border: none;
-  }
-  
-  .table tbody td {
-    vertical-align: middle;
-    background-color: #fff;
-    color: #333;
-    border-top: 1px solid #ccc;
-  }
-  
-  .table tbody tr:hover {
-    background-color: #f7f7f7;
-    transition: background-color 0.2s ease;
-  }
-  
-  /* Ana sayfa butonu */
-  .btn {
-    border-radius: 0.5rem;
-    transition: all 0.2s ease;
-  }
-  .btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  }
-  
-  .back-home-btn {
-    margin-top: 2rem;
-    display: block;
-    text-align: center;
-  }
-  
-  .back-home-btn button {
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    background: transparent;
-    padding: 0.6rem 1.5rem;
-    font-weight: 600;
-    border-radius: 8px;
-    transition: 0.3s;
-  }
-  
-  .back-home-btn button:hover {
-    background-color: var(--primary);
-    color: var(--text-light);
-  }
-  
+  --main-bg: #F7FDFB;
+  --primary: #2D9596;
+  --highlight: #077A7D;
+  --text-light: #ffffff;
+  --muted: #9CAFAA;
+}
+
+body {
+  background-color: var(--main-bg);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ana kutu */
+.yazokulu-container {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 960px;
+  margin: 2rem auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Başlık */
+.yazokulu-container h1 {
+  color: var(--primary) !important;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.yazokulu-container h1::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: var(--highlight);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+h4, h5 {
+  font-weight: 600;
+  color: var(--primary);
+  text-align: center;
+}
+
+.text-muted {
+  color: var(--muted) !important;
+}
+
+/* Dropdown */
+select.form-select {
+  box-shadow: none;
+  transition: border-color 0.2s ease-in-out;
+  border: 1px solid #90D1CA;
+  background-color: #fff;
+  color: #143D60;
+}
+
+select.form-select:focus {
+  border-color: var(--highlight);
+  box-shadow: 0 0 0 0.2rem rgba(7, 122, 125, 0.25);
+}
+
+select.form-select option {
+  color: #143D60;
+  background-color: #fff;
+}
+
+select.form-select option:checked,
+select.form-select option:focus,
+select.form-select option:hover {
+  background-color: var(--highlight);
+  color: #fff;
+}
+
+/* Arama input */
+.input-group input {
+  border-radius: 6px 0 0 6px;
+  border: 1px solid #90D1CA;
+  background-color: #fff;
+  color: #143D60;
+}
+
+/* Arama butonu */
+.input-group button,
+.btn-primary {
+  border-radius: 0 6px 6px 0;
+  background-color: var(--highlight);
+  border-color: var(--highlight);
+  color: var(--text-light);
+}
+
+.input-group button:hover,
+.btn-primary:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--text-light);
+}
+
+/* Tablo */
+.table thead th {
+  vertical-align: middle;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background-color: #90D1CA;
+  color: #143D60;
+  border: none;
+}
+
+.table tbody td {
+  vertical-align: middle;
+  background-color: #fff;
+  color: #143D60;
+  border-top: 1px solid #90D1CA;
+}
+
+.table tbody tr:hover {
+  background-color: #eef7f6;
+  transition: background-color 0.2s ease;
+}
+
+/* Buton animasyonu */
+.btn {
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+}
+
+/* Ana sayfa geri dön */
+.back-home-btn {
+  margin-top: 2rem;
+  display: block;
+  text-align: center;
+}
+
+.back-home-btn button {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.back-home-btn button:hover {
+  background-color: var(--primary);
+  color: var(--text-light);
+}
