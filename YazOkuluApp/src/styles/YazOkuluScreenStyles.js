@@ -125,12 +125,12 @@ floatingChatIcon: {
 },
 floatingHomeButton: {
   position: 'absolute',
-  bottom: 20,
-  left: 20,
+  bottom: 28,
+  left: 24,
   backgroundColor: '#5DB996',
-  width: 50,
-  height: 50,
-  borderRadius: 25,
+  width: 60,
+  height: 60,
+  borderRadius: 28,
   justifyContent: 'center',
   alignItems: 'center',
   zIndex: 999,
@@ -138,7 +138,7 @@ floatingHomeButton: {
 },
 floatingHomeIcon: {
   color: '#fff',
-  fontSize: 22,
+  fontSize: 24,
 }
 });
 

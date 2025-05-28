@@ -68,7 +68,7 @@ const YazOkuluScreen = () => {
     <div className="min-h-screen bg-[#F7FDFB] text-[#143D60] px-6 py-8">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold mb-2">🎓 Yaz Okulu Başvurusu</h1>
+          <h1 className="text-3xl font-bold mb-2"> Yaz Okulu Başvurusu</h1>
           <p className="text-[#555]">
             Filtreleri kullanarak ders arayabilir veya üniversite seçimi yapabilirsiniz.
           </p>
